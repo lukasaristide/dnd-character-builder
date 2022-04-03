@@ -1,9 +1,10 @@
 package com.dndcharacterbuilder.ui.main
 
-import android.content.Context
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+
 import com.dndcharacterbuilder.R
 
 private val TAB_TITLES = arrayOf(
@@ -12,23 +13,23 @@ private val TAB_TITLES = arrayOf(
 )
 
 /**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
+ * A [FragmentStateAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
-    : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(private val activity: ComponentActivity, fm: FragmentManager)
+    : FragmentStateAdapter(fm, activity.lifecycle) {
 
-    override fun getItem(position: Int): Fragment {
-        // getItem is called to instantiate the fragment for the given page.
+    override fun createFragment(position: Int): Fragment {
+        // createFragment is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         return PlaceholderFragment.newInstance(position + 1)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return context.resources.getString(TAB_TITLES[position])
+    fun getPageTitle(position: Int): String {
+        return activity.resources.getString(TAB_TITLES[position])
     }
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         // Show 2 total pages.
         return 2
     }
