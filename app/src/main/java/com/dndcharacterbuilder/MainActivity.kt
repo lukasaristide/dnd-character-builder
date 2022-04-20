@@ -3,6 +3,7 @@ package com.dndcharacterbuilder
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -17,12 +18,13 @@ import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
@@ -34,9 +36,23 @@ class MainActivity : AppCompatActivity() {
         }).attach()
         val fab: FloatingActionButton = binding.fab
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fab.setOnClickListener {
+            fab.setExpanded(true)
+            binding.tabs.visibility = View.GONE
+            binding.charactersList.setEnabled(true)
+            viewPager.setUserInputEnabled(false)
+        }
+    }
+
+    override fun onBackPressed(): Unit {
+        if (binding.fab.isExpanded()) {
+            binding.fab.setExpanded(false)
+            binding.tabs.visibility = View.VISIBLE
+            binding.charactersList.setEnabled(false)
+            binding.viewPager.setUserInputEnabled(true)
+        }
+        else {
+            super.onBackPressed()
         }
     }
 }
