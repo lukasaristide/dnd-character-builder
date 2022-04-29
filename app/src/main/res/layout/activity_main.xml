@@ -28,33 +28,41 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <!-- TODO change background. I suggest a white,
-         semi-transparent blur effect. -->
-    <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:background="#8800FF00"
-        android:enabled="false"
-        android:id="@+id/characters_list"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:visibility="invisible"
-        app:layout_behavior="com.google.android.material.transformation.FabTransformationSheetBehavior"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+	    <androidx.viewpager2.widget.ViewPager2
+	        android:id="@+id/view_pager"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        />
+
+	    <com.google.android.material.floatingactionbutton.FloatingActionButton
+	        android:id="@+id/fab"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="bottom|end"
+	        android:layout_marginEnd="@dimen/fab_margin"
+	        android:layout_marginBottom="16dp"
+	        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+	    <!-- TODO change background. I suggest a white,
+	         semi-transparent blur effect. -->
+	    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+	        android:background="#8800FF00"
+	        android:enabled="false"
+	        android:id="@+id/characters_list"
+	        android:layout_height="match_parent"
+	        android:layout_width="match_parent"
+	        android:visibility="invisible"
+	        app:layout_behavior="com.google.android.material.transformation.FabTransformationSheetBehavior"
+	        >
+
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
