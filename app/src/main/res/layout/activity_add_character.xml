@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:padding="16dp"
+		>
+
+		<TextView
+			android:labelFor="@id/name_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/name_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:autofillHints="name"
+			android:id="@+id/name_field"
+			android:inputType="textPersonName"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/race_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/race_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/race_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/class_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/class_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/class_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/strength_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/strength_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/strength_field"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/dexterity_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/dexterity_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/dexterity_field"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/constitution_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/constitution_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/constitution_field"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/intelligence_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/intelligence_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/intelligence_field"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/wisdom_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/wisdom_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/wisdom_field"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<TextView
+			android:labelFor="@id/charisma_field"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/charisma_field_description"
+			android:textColor="@android:color/black"
+			/>
+
+		<EditText
+			android:id="@+id/charisma_field"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			/>
+
+		<Button
+			android:id="@+id/add_character_button"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/save_button_text"
+			/>
+
+		<Button
+			android:id="@+id/cancel_adding_character_button"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="@string/cancel_button_text"
+			/>
+
+	</LinearLayout>
+
+</ScrollView>

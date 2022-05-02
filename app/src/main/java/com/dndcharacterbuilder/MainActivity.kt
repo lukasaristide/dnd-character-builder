@@ -6,6 +6,8 @@ import android.view.MenuItem
 import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 import com.dndcharacterbuilder.databinding.ActivityMainBinding
+import com.dndcharacterbuilder.ui.main.CharactersFragment
 import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -36,10 +39,15 @@ class MainActivity : AppCompatActivity() {
         }).attach()
         val fab: FloatingActionButton = binding.fab
 
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<CharactersFragment>(R.id.characters_frame)
+        }
+
         fab.setOnClickListener {
             fab.setExpanded(true)
             binding.tabs.visibility = View.GONE
-            binding.charactersList.setEnabled(true)
+            binding.charactersFrame.setEnabled(true)
             viewPager.setUserInputEnabled(false)
         }
     }
@@ -48,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         if (binding.fab.isExpanded()) {
             binding.fab.setExpanded(false)
             binding.tabs.visibility = View.VISIBLE
-            binding.charactersList.setEnabled(false)
+            binding.charactersFrame.setEnabled(false)
             binding.viewPager.setUserInputEnabled(true)
         }
         else {
