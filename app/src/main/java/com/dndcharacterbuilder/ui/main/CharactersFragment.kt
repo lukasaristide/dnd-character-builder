@@ -31,10 +31,6 @@ class CharactersFragment : Fragment() {
     override fun onViewCreated (view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listCharacters()
-
-        binding.addCharacterButton.setOnClickListener {
-            startActivity(Intent(context, AddCharacterActivity::class.java))
-        }
     }
 
     override fun onResume () {
@@ -52,7 +48,12 @@ class CharactersFragment : Fragment() {
                 runOnUiThread {
                     binding.charactersList.adapter = CharactersAdapter(
                         it,
-                        characters
+                        characters,
+                        object : CharactersAdapter.OnAddCharacterListener {
+                            override fun onClick() {
+                                startActivity(Intent(context, AddCharacterActivity::class.java))
+                            }
+                        }
                     )
                 }
             }
