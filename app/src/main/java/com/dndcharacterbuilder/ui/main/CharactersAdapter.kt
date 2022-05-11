@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
+import com.dndcharacterbuilder.R
 import com.dndcharacterbuilder.database.Character
 import com.dndcharacterbuilder.databinding.ItemAddCharacterCardBinding
 import com.dndcharacterbuilder.databinding.ItemCharacterCardBinding
@@ -43,12 +44,15 @@ class CharactersAdapter(
 	override fun onBindViewHolder (holder: ViewHolder, position: Int) {
 		if (position < characters.size){
 			(holder as CharacterViewHolder).name.text = characters[position].name
+			holder.race.text = characters[position].race
+			holder.cclass.text = characters[position].cclass
 		}
 	}
 
 	inner abstract class ViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
 		init {
 			binding.root.layoutParams = LinearLayout.LayoutParams(
+					// Order of dimensions: width, height
 					LinearLayout.LayoutParams.MATCH_PARENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT
 				).apply {
@@ -63,6 +67,8 @@ class CharactersAdapter(
 
 	inner class CharacterViewHolder(binding: ItemCharacterCardBinding) : ViewHolder(binding) {
 		val name: TextView = binding.nameField
+		val race: TextView = binding.raceField
+		val cclass: TextView = binding.classField
 	}
 
 	inner class AddCharacterViewHolder(binding: ItemAddCharacterCardBinding) : ViewHolder(binding) {
