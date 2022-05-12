@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
@@ -46,21 +47,30 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             fab.setExpanded(true)
-            binding.tabs.visibility = View.GONE
-            binding.charactersFrame.setEnabled(true)
-            viewPager.setUserInputEnabled(false)
         }
     }
 
     override fun onBackPressed(): Unit {
         if (binding.fab.isExpanded()) {
             binding.fab.setExpanded(false)
-            binding.tabs.visibility = View.VISIBLE
-            binding.charactersFrame.setEnabled(false)
-            binding.viewPager.setUserInputEnabled(true)
         }
         else {
             super.onBackPressed()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.import_item -> {
+                Toast.makeText(this, "Implement me!", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
