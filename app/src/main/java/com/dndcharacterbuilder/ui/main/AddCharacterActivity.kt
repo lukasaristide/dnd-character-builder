@@ -1,10 +1,12 @@
 package com.dndcharacterbuilder.ui.main
 
 import android.os.Bundle
-import android.widget.EditText
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.room.Room
 
 import kotlin.concurrent.thread
@@ -24,9 +26,39 @@ class AddCharacterActivity : AppCompatActivity() {
 		Room.databaseBuilder(this, AppDatabase::class.java, AppDatabase.databaseName).build()
 	}
 
+	private val classesList: ListPopupWindow by lazy {
+		val field = binding.classField
+		val items = database.classDao().getAll().map { it.name }
+		val popup = ListPopupWindow(this).apply {
+			setAdapter(ArrayAdapter(this@AddCharacterActivity, R.layout.item_popup, items))
+			anchorView = field
+			isModal = true
+			setOnItemClickListener { _, _, position, _ ->
+				field.text = items[position]
+				dismiss()
+			}
+		}
+		field.apply {
+			setOnClickListener { popup.show() }
+			isFocusableInTouchMode = true
+			setOnFocusChangeListener { _, hasFocus ->
+				if (hasFocus) {
+					popup.show()
+				}
+			}
+		}
+		popup
+	}
+
 	override fun onCreate (savedInstanceState: Bundle?): Unit {
 		super.onCreate(savedInstanceState)
 		setContentView(binding.root)
+
+		// This field is initalized on first reference.
+		// It cannot be initalized on the main thread as it uses database.
+		thread {
+			classesList
+		}
 
 		binding.cancelAddingCharacterButton.setOnClickListener {
 			finish()
@@ -60,18 +92,18 @@ class AddCharacterActivity : AppCompatActivity() {
 		}
 	}
 
-	private fun require (view: EditText) {
+	private fun require (view: TextView) {
 		if (view.text.isEmpty()) {
 			throw RequirementNotMetException()
 		}
 	}
 
-	private fun requireString (view: EditText): String {
+	private fun requireString (view: TextView): String {
 		require(view)
 		return view.text.toString()
 	}
 
-	private fun requireInt (view: EditText): Int {
+	private fun requireInt (view: TextView): Int {
 		require(view)
 		return view.text.toString().toInt()
 	}
