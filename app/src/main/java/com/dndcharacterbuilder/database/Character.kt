@@ -11,8 +11,16 @@ import androidx.room.PrimaryKey
             entity = Class::class,
             parentColumns = ["id"],
             childColumns = ["cclass"]
+        ),
+        ForeignKey(
+            entity = Race::class,
+            parentColumns = ["id"],
+            childColumns = ["race"]
         )],
-    indices = [Index(value = ["cclass"])]
+    indices = [
+        Index(value = ["cclass"]),
+        Index(value = ["race"])
+        ]
 )
 data class Character(
     var name: String,
@@ -22,7 +30,7 @@ data class Character(
     var intelligence: Int,
     var wisdom: Int,
     var charisma: Int,
-    var race: String,
+    var race: Int,
     var cclass: Int
 ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0

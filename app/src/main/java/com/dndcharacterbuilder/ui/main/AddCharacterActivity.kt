@@ -27,37 +27,22 @@ class AddCharacterActivity : AppCompatActivity() {
 	}
 
 	private val classesList: ListPopupWindow by lazy {
-		val field = binding.classField
-		val items = database.classDao().getAll().map { it.name }
-		val popup = ListPopupWindow(this).apply {
-			setAdapter(ArrayAdapter(this@AddCharacterActivity, R.layout.item_popup, items))
-			anchorView = field
-			isModal = true
-			setOnItemClickListener { _, _, position, _ ->
-				field.text = items[position]
-				dismiss()
-			}
-		}
-		field.apply {
-			setOnClickListener { popup.show() }
-			isFocusableInTouchMode = true
-			setOnFocusChangeListener { _, hasFocus ->
-				if (hasFocus) {
-					popup.show()
-				}
-			}
-		}
-		popup
+		createPopupList(binding.classField, database.classDao().getAll().map { it.name })
+	}
+
+	private val racesList: ListPopupWindow by lazy {
+		createPopupList(binding.raceField, database.raceDao().getAll().map { it.name })
 	}
 
 	override fun onCreate (savedInstanceState: Bundle?): Unit {
 		super.onCreate(savedInstanceState)
 		setContentView(binding.root)
 
-		// This field is initalized on first reference.
-		// It cannot be initalized on the main thread as it uses database.
+		// These fields are initalized on first reference.
+		// They cannot be initalized on the main thread as they use database.
 		thread {
 			classesList
+			racesList
 		}
 
 		binding.cancelAddingCharacterButton.setOnClickListener {
@@ -70,7 +55,7 @@ class AddCharacterActivity : AppCompatActivity() {
 					val character = Character(
 						name = requireString(binding.nameField),
 
-						race = requireString(binding.raceField),
+						race = database.raceDao().getDetail(requireString(binding.raceField))!!.id,
 						cclass = database.classDao().getDetail(requireString(binding.classField))!!.id,
 
 						strength = requireInt(binding.strengthField),
@@ -90,6 +75,28 @@ class AddCharacterActivity : AppCompatActivity() {
 				}
 			}
 		}
+	}
+
+	private fun createPopupList (field: TextView, items: List<String>): ListPopupWindow {
+		val popup = ListPopupWindow(this).apply {
+			setAdapter(ArrayAdapter(this@AddCharacterActivity, R.layout.item_popup, items))
+			anchorView = field
+			isModal = true
+			setOnItemClickListener { _, _, position, _ ->
+				field.text = items[position]
+				dismiss()
+			}
+		}
+		field.apply {
+			setOnClickListener { popup.show() }
+			isFocusableInTouchMode = true
+			setOnFocusChangeListener { _, hasFocus ->
+				if (hasFocus) {
+					popup.show()
+				}
+			}
+		}
+		return popup
 	}
 
 	private fun require (view: TextView) {

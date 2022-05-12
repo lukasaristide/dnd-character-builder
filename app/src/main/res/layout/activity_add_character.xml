@@ -37,10 +37,15 @@
 			android:textColor="@android:color/black"
 			/>
 
-		<EditText
+		<TextView
+			android:background="@drawable/popup_button_background"
 			android:id="@+id/race_field"
 			android:layout_height="wrap_content"
+			android:layout_marginVertical="8dp"
 			android:layout_width="match_parent"
+			android:padding="8dp"
+			android:textColor="@android:color/black"
+			android:textSize="16sp"
 			/>
 
 		<TextView
