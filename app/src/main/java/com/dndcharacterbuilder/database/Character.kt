@@ -1,9 +1,19 @@
 package com.dndcharacterbuilder.database
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = Class::class,
+            parentColumns = ["id"],
+            childColumns = ["cclass"]
+        )],
+    indices = [Index(value = ["cclass"])]
+)
 data class Character(
     var name: String,
     var strength: Int,
@@ -13,7 +23,7 @@ data class Character(
     var wisdom: Int,
     var charisma: Int,
     var race: String,
-    var cclass: String
+    var cclass: Int
 ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

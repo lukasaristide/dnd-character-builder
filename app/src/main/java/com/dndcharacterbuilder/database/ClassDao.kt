@@ -8,15 +8,15 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface CharacterDao {
+interface ClassDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(character: Character)
+    fun insert(klass: Class)
     @Update
-    fun update(character: Character)
+    fun update(klass: Class)
     @Delete
-    fun delete(character: Character)
-    @Query("select * from character")
-    fun getAll(): List<Character>
-    @Query("select * from characterinfo")
-    fun getInfo(): List<CharacterInfo>
+    fun delete(klass: Class)
+    @Query("select * from klass")
+    fun getAll(): List<Class>
+    @Query("select * from klass where name = :name")
+    fun getDetail(name: String): Class?
 }

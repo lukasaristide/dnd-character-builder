@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
 import com.dndcharacterbuilder.R
-import com.dndcharacterbuilder.database.Character
+import com.dndcharacterbuilder.database.CharacterInfo
 import com.dndcharacterbuilder.databinding.ItemAddCharacterCardBinding
 import com.dndcharacterbuilder.databinding.ItemCharacterCardBinding
 
 class CharactersAdapter(
 	private val context: Context,
-	private val characters: List<Character>,
+	private val characters: List<CharacterInfo>,
 	private val addListener: OnAddCharacterListener = object : OnAddCharacterListener { }
 ) : RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
 

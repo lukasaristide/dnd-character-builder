@@ -44,7 +44,7 @@ class CharactersFragment : Fragment() {
                 characterDao = Room.databaseBuilder(it, AppDatabase::class.java, AppDatabase.databaseName).build().characterDao()
             }
             thread {
-                val characters = characterDao!!.getAll()
+                val characters = characterDao!!.getInfo()
                 runOnUiThread {
                     binding.charactersList.adapter = CharactersAdapter(
                         it,
