@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
-        TabLayoutMediator(tabs, viewPager, { tab, positon ->
-            tab.text = sectionsPagerAdapter.getPageTitle(positon)
-        }).attach()
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = sectionsPagerAdapter.getPageTitle(position)
+        }.attach()
         val fab: FloatingActionButton = binding.fab
 
         supportFragmentManager.commit {
@@ -46,13 +46,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener {
-            fab.setExpanded(true)
+            fab.isExpanded = true
         }
     }
 
     override fun onBackPressed(): Unit {
-        if (binding.fab.isExpanded()) {
-            binding.fab.setExpanded(false)
+        if (binding.fab.isExpanded) {
+            binding.fab.isExpanded = false
         }
         else {
             super.onBackPressed()

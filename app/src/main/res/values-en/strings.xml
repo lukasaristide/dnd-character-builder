@@ -12,4 +12,7 @@
 	<string name="strength_field_description">Strength</string>
 	<string name="race_field_description">Race</string>
 	<string name="wisdom_field_description">Wisdom</string>
+	<string name="app_name">DnD Character Builder</string>
+	<string name="tab_text_1">Tab 1</string>
+	<string name="tab_text_2">Tab 2</string>
 </resources>

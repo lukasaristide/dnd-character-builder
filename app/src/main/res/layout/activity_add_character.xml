@@ -14,47 +14,39 @@
 		>
 
 		<TextView
-			android:labelFor="@id/name_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/name_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/name_field"
+			android:text="@string/name_field_description" />
 
 		<EditText
-			android:autofillHints="name"
 			android:id="@+id/name_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:autofillHints="name"
 			android:inputType="textPersonName"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:labelFor="@id/race_field"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			android:text="@string/race_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:text="@string/race_field_description" />
 
 		<TextView
-			android:background="@drawable/popup_button_background"
 			android:id="@+id/race_field"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginVertical="8dp"
-			android:layout_width="match_parent"
+			android:background="@drawable/popup_button_background"
 			android:padding="8dp"
-			android:textColor="@android:color/black"
-			android:textSize="16sp"
-			/>
+			android:textSize="16sp" />
 
 		<TextView
-			android:labelFor="@id/class_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/class_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/class_field"
+			android:text="@string/class_field_description" />
 
 		<TextView
 			android:background="@drawable/popup_button_background"
@@ -68,100 +60,88 @@
 			/>
 
 		<TextView
-			android:labelFor="@id/strength_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/strength_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/strength_field"
+			android:text="@string/strength_field_description" />
 
 		<EditText
 			android:id="@+id/strength_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
 			android:inputType="number"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<TextView
-			android:labelFor="@id/dexterity_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/dexterity_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/dexterity_field"
+			android:text="@string/dexterity_field_description" />
 
 		<EditText
 			android:id="@+id/dexterity_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
 			android:inputType="number"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<TextView
-			android:labelFor="@id/constitution_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/constitution_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/constitution_field"
+			android:text="@string/constitution_field_description" />
 
 		<EditText
 			android:id="@+id/constitution_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
 			android:inputType="number"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<TextView
-			android:labelFor="@id/intelligence_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/intelligence_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/intelligence_field"
+			android:text="@string/intelligence_field_description" />
 
 		<EditText
 			android:id="@+id/intelligence_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
 			android:inputType="number"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<TextView
-			android:labelFor="@id/wisdom_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/wisdom_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/wisdom_field"
+			android:text="@string/wisdom_field_description" />
 
 		<EditText
 			android:id="@+id/wisdom_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
 			android:inputType="number"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<TextView
-			android:labelFor="@id/charisma_field"
-			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="@string/charisma_field_description"
-			android:textColor="@android:color/black"
-			/>
+			android:layout_height="wrap_content"
+			android:labelFor="@id/charisma_field"
+			android:text="@string/charisma_field_description" />
 
 		<EditText
 			android:id="@+id/charisma_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
 			android:inputType="number"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			/>
+			android:minHeight="48dp" />
 
 		<Button
 			android:id="@+id/add_character_button"
