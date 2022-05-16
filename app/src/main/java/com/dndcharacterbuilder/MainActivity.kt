@@ -1,9 +1,11 @@
 package com.dndcharacterbuilder
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.util.Log
+import android.view.*
+import android.widget.EditText
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +21,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.dndcharacterbuilder.databinding.ActivityMainBinding
 import com.dndcharacterbuilder.ui.main.CharactersFragment
 import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.awaitAll
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,9 +69,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.import_item -> {
-                Toast.makeText(this, "Implement me!", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(this)
+                val dialogLayout = layoutInflater.inflate(R.layout.request_url, null)
+                val url = dialogLayout.findViewById<EditText>(R.id.request_url_text)
+
+                with (builder) {
+                    setTitle("Provide URL for data import:")
+                    setPositiveButton("OK") { dialog, which ->
+                        Log.d("URL", "Got URL: " + url.text.toString())
+                    }
+                    setNegativeButton("Cancel") {dialog, which ->
+                    }
+                    setView(dialogLayout)
+                    show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
