@@ -31,3 +31,6 @@ local.properties
 
 # Android Studio files
 /.idea/
+
+# C++ build files
+/app/.cxx/

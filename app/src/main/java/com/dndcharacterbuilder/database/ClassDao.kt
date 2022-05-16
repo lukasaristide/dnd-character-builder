@@ -15,6 +15,8 @@ interface ClassDao {
     fun update(klass: Class)
     @Delete
     fun delete(klass: Class)
+    @Delete
+    fun delete(klass: List<Class>)
     @Query("select * from klass")
     fun getAll(): List<Class>
     @Query("select * from klass where name = :name")

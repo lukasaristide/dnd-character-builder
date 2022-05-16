@@ -7,6 +7,7 @@
     <string name="dexterity_field_description">Dexterity</string>
     <string name="fill_necessary_fields_text">Please fill all necessary fields</string>
     <string name="import_item_text">Import</string>
+    <string name="clear_db_text">Clear DB</string>
     <string name="intelligence_field_description">Intelligence</string>
     <string name="name_field_description">Name</string>
     <string name="save_button_text">Save</string>

@@ -15,6 +15,8 @@ interface RaceDao {
     fun update(race: Race)
     @Delete
     fun delete(race: Race)
+    @Delete
+    fun delete(race: List<Race>)
     @Query("select * from race")
     fun getAll(): List<Race>
     @Query("select * from race where name = :name")
