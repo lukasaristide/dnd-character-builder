@@ -2,6 +2,7 @@ package com.dndcharacterbuilder
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,31 +14,37 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
-import com.dndcharacterbuilder.database.AppDatabase
-import com.dndcharacterbuilder.database.Race
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-import com.dndcharacterbuilder.databinding.ActivityMainBinding
-import com.dndcharacterbuilder.jsonloader.GetRaces
-import com.dndcharacterbuilder.ui.main.CharactersFragment
-import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
+import java.lang.Exception
+import java.net.URL
+
+import kotlin.concurrent.thread
+
 import kotlinx.coroutines.android.awaitFrame
 import kotlinx.coroutines.awaitAll
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import java.lang.Exception
-import java.net.URL
-import kotlin.concurrent.thread
+
+import com.dndcharacterbuilder.databinding.ActivityMainBinding
+import com.dndcharacterbuilder.database.AppDatabase
+import com.dndcharacterbuilder.database.Race
+import com.dndcharacterbuilder.jsonloader.GetRaces
+import com.dndcharacterbuilder.ui.bitmaputils.*
+import com.dndcharacterbuilder.ui.main.CharactersFragment
+import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
     companion object {
         init {
             System.loadLibrary("dndcharacterbuilder")
         }
+
+        const val charactersFragmentTag: String = "characters"
     }
 
     private val binding: ActivityMainBinding by lazy {
@@ -58,19 +65,26 @@ class MainActivity : AppCompatActivity() {
         }.attach()
         val fab: FloatingActionButton = binding.fab
 
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            add<CharactersFragment>(R.id.characters_frame)
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<CharactersFragment>(R.id.characters_frame, charactersFragmentTag)
+            }
         }
 
         fab.setOnClickListener {
-            fab.isExpanded = true
+            expandFab(fab)
         }
+    }
+
+    override fun onResume(): Unit {
+        super.onResume()
+        closeFab(binding.fab)
     }
 
     override fun onBackPressed(): Unit {
         if (binding.fab.isExpanded) {
-            binding.fab.isExpanded = false
+            closeFab(binding.fab)
         }
         else {
             super.onBackPressed()
@@ -141,5 +155,40 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun expandFab(fab: FloatingActionButton) {
+        if (fab.isExpanded()) {
+            return
+        }
+        // Hide fab so it is not included in the blurred background
+        fab.setVisibility(View.GONE)
+        supportFragmentManager.findFragmentByTag(charactersFragmentTag)?.getView()?.background = BitmapDrawable(
+            resources,
+            getBitmapFromView(binding.root)
+                .blur(this@MainActivity, 5f)
+                .bleach(140)
+        )
+        fab.setVisibility(View.VISIBLE)
+        binding.root.invalidate()
+        fab.setExpanded(true)
+        // TODO The programmatically set background does not behave
+        // as expected and thus the need. How to fix this?
+        // Problem: the bitmap appears behind all views, not as
+        // background of the view. When testing ColorDrawable instead,
+        // nothing happens.
+        binding.tabs.setVisibility(View.INVISIBLE)
+        binding.viewPager.setVisibility(View.INVISIBLE)
+    }
+
+    private fun closeFab(fab: FloatingActionButton) {
+        if (!fab.isExpanded()) {
+            return
+        }
+        binding.tabs.setVisibility(View.VISIBLE)
+        binding.viewPager.setVisibility(View.VISIBLE)
+        binding.fab.setExpanded(false)
+        supportFragmentManager.findFragmentByTag(charactersFragmentTag)?.getView()?.background = null
+        recreate()
     }
 }
