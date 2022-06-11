@@ -37,7 +37,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
+			app:srcCompat="@drawable/ic_person"
+			/>
 
         <com.google.android.material.circularreveal.CircularRevealFrameLayout
             android:enabled="false"
