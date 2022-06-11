@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".ui.main.AddCharacterActivity"
+            android:name=".ui.main.AddEditCharacterActivity"
             />
 
     </application>

@@ -78,12 +78,10 @@ class CharactersAdapter(
 
 		private val menu: ListPopupWindow = ListPopupWindow(context)
 		private val menuItems: Array<MenuItem> = arrayOf (
-			/*
 			MenuItem(
 				context.resources.getString(R.string.edit_text),
 				{ this@CharactersAdapter.menuListener.edit(getAdapterItem()) }
 			),
-			*/
 			MenuItem(
 				context.resources.getString(R.string.delete_text),
 				{ this@CharactersAdapter.menuListener.delete(getAdapterItem()) }

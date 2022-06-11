@@ -52,21 +52,30 @@ class CharactersFragment : Fragment() {
                         characters,
                         object : CharactersAdapter.OnAddCharacterListener {
                             override fun onClick() {
-                                startActivity(Intent(context, AddCharacterActivity::class.java))
+                                startActivity(Intent(context, AddEditCharacterActivity::class.java))
                             }
                         },
-						object : CharactersAdapter.OnMenuItemClickListener {
-							override fun delete(characterInfo: CharacterInfo) {
-								thread {
-									characterDao!!.delete(characterDao!!.getById(characterInfo.characterId))
-									runOnUiThread {
-										//TODO At this point happens exactly the same thing as
-										// all the previous problems with FAB background.
-										listCharacters()
-									}
-								}
-							}
-						}
+                        object : CharactersAdapter.OnMenuItemClickListener {
+                            override fun delete(characterInfo: CharacterInfo) {
+                                thread {
+                                    val character = characterDao!!.getById(characterInfo.characterId)
+                                    if (character != null) {
+                                        characterDao!!.delete(character)
+                                    }
+                                    runOnUiThread {
+                                        //TODO At this point happens exactly the same thing as
+                                        // all the previous problems with FAB background.
+                                        listCharacters()
+                                    }
+                                }
+                            }
+
+                            override fun edit(characterInfo: CharacterInfo) {
+                                val intent = Intent(context, AddEditCharacterActivity::class.java)
+                                intent.putExtra(AddEditCharacterActivity.EXTRA_ID, characterInfo.characterId)
+                                startActivity(intent)
+                            }
+                        }
                     )
                 }
             }

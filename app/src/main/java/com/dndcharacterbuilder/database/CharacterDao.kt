@@ -23,4 +23,6 @@ interface CharacterDao {
     fun getAll(): List<Character>
     @Query("select * from CharacterInfo")
     fun getInfo(): List<CharacterInfo>
+    @Query("select * from CharacterInfo where characterId = :id")
+    fun getInfo(id: Int): CharacterInfo?
 }

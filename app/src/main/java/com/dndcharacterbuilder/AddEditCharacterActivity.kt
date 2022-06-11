@@ -16,7 +16,10 @@ import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.database.Character
 import com.dndcharacterbuilder.databinding.ActivityAddCharacterBinding
 
-class AddCharacterActivity : AppCompatActivity() {
+class AddEditCharacterActivity : AppCompatActivity() {
+	companion object {
+		const val EXTRA_ID: String = "characterId"
+	}
 
 	private val binding: ActivityAddCharacterBinding by lazy {
 		ActivityAddCharacterBinding.inflate(layoutInflater)
@@ -34,6 +37,10 @@ class AddCharacterActivity : AppCompatActivity() {
 		createPopupList(binding.raceField, database.raceDao().getAll().map { it.name })
 	}
 
+	private val characterId: Int by lazy {
+		intent.getIntExtra(EXTRA_ID, 0)
+	}
+
 	override fun onCreate (savedInstanceState: Bundle?): Unit {
 		super.onCreate(savedInstanceState)
 		setContentView(binding.root)
@@ -43,6 +50,26 @@ class AddCharacterActivity : AppCompatActivity() {
 		thread {
 			classesList
 			racesList
+		}
+
+		if (savedInstanceState == null && characterId != 0) {
+			thread threadStart@ {
+				val characterInfo = database.characterDao().getInfo(characterId)
+				if (characterInfo == null) {
+					return@threadStart
+				}
+				binding.nameField.setText(characterInfo.name)
+
+				binding.raceField.text = characterInfo.race
+				binding.classField.text = characterInfo.cclass
+
+				binding.strengthField.setText(characterInfo.strength.toString())
+				binding.dexterityField.setText(characterInfo.dexterity.toString())
+				binding.constitutionField.setText(characterInfo.constitution.toString())
+				binding.intelligenceField.setText(characterInfo.intelligence.toString())
+				binding.wisdomField.setText(characterInfo.wisdom.toString())
+				binding.charismaField.setText(characterInfo.charisma.toString())
+			}
 		}
 
 		binding.cancelAddingCharacterButton.setOnClickListener {
@@ -66,7 +93,13 @@ class AddCharacterActivity : AppCompatActivity() {
 						charisma = requireInt(binding.charismaField)
 					)
 
-					database.characterDao().insert(character)
+					if (characterId == 0) {
+						database.characterDao().insert(character)
+					}
+					else {
+						character.id = characterId
+						database.characterDao().update(character)
+					}
 					finish()
 				} catch (e: RequirementNotMetException) {
 					runOnUiThread {
@@ -79,7 +112,7 @@ class AddCharacterActivity : AppCompatActivity() {
 
 	private fun createPopupList (field: TextView, items: List<String>): ListPopupWindow {
 		val popup = ListPopupWindow(this).apply {
-			setAdapter(ArrayAdapter(this@AddCharacterActivity, R.layout.item_popup, items))
+			setAdapter(ArrayAdapter(this@AddEditCharacterActivity, R.layout.item_popup, items))
 			anchorView = field
 			isModal = true
 			setOnItemClickListener { _, _, position, _ ->
