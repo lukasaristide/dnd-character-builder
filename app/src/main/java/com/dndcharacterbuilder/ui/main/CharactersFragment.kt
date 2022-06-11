@@ -15,6 +15,7 @@ import kotlin.concurrent.thread
 
 import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.database.CharacterDao
+import com.dndcharacterbuilder.database.CharacterInfo
 import com.dndcharacterbuilder.databinding.FragmentCharactersBinding
 
 class CharactersFragment : Fragment() {
@@ -53,7 +54,19 @@ class CharactersFragment : Fragment() {
                             override fun onClick() {
                                 startActivity(Intent(context, AddCharacterActivity::class.java))
                             }
-                        }
+                        },
+						object : CharactersAdapter.OnMenuItemClickListener {
+							override fun delete(characterInfo: CharacterInfo) {
+								thread {
+									characterDao!!.delete(characterDao!!.getById(characterInfo.characterId))
+									runOnUiThread {
+										//TODO At this point happens exactly the same thing as
+										// all the previous problems with FAB background.
+										listCharacters()
+									}
+								}
+							}
+						}
                     )
                 }
             }

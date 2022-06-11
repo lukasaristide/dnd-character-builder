@@ -17,6 +17,8 @@ interface CharacterDao {
     fun delete(character: Character)
     @Delete
     fun delete(characters: List<Character>)
+	@Query("select * from Character where id = :id")
+	fun getById(id: Int): Character?
     @Query("select * from Character")
     fun getAll(): List<Character>
     @Query("select * from CharacterInfo")

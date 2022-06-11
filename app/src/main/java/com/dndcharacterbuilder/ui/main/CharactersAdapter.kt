@@ -3,8 +3,11 @@ package com.dndcharacterbuilder.ui.main
 import android.content.Context
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.ListPopupWindow
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +21,8 @@ import com.dndcharacterbuilder.databinding.ItemCharacterCardBinding
 class CharactersAdapter(
 	private val context: Context,
 	private val characters: List<CharacterInfo>,
-	private val addListener: OnAddCharacterListener = object : OnAddCharacterListener { }
+	private val addListener: OnAddCharacterListener = object : OnAddCharacterListener { },
+	private val menuListener: OnMenuItemClickListener = object : OnMenuItemClickListener { }
 ) : RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
 
 	object ViewType {
@@ -63,12 +67,42 @@ class CharactersAdapter(
 
 		private fun dpToPx (dp: Int): Int
 			= TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.getResources().getDisplayMetrics()).toInt()
+
+		protected fun getAdapterItem(): CharacterInfo = this@CharactersAdapter.characters[this@ViewHolder.getBindingAdapterPosition()]
 	}
 
 	inner class CharacterViewHolder(binding: ItemCharacterCardBinding) : ViewHolder(binding) {
 		val name: TextView = binding.nameField
 		val race: TextView = binding.raceField
 		val cclass: TextView = binding.classField
+
+		private val menu: ListPopupWindow = ListPopupWindow(context)
+		private val menuItems: Array<MenuItem> = arrayOf (
+			/*
+			MenuItem(
+				context.resources.getString(R.string.edit_text),
+				{ this@CharactersAdapter.menuListener.edit(getAdapterItem()) }
+			),
+			*/
+			MenuItem(
+				context.resources.getString(R.string.delete_text),
+				{ this@CharactersAdapter.menuListener.delete(getAdapterItem()) }
+			)
+		)
+
+		init {
+			menu.setAdapter(ArrayAdapter(context, R.layout.popup_menu_item, menuItems))
+      menu.anchorView = binding.root
+      menu.isModal = true
+      menu.setOnItemClickListener({ parent, _, position, _ ->
+        (parent.getItemAtPosition(position) as? MenuItem)?.let { it.action() }
+        menu.dismiss()
+      })
+      binding.root.setOnLongClickListener(View.OnLongClickListener {
+        menu.show()
+        false
+      })
+		}
 	}
 
 	inner class AddCharacterViewHolder(binding: ItemAddCharacterCardBinding) : ViewHolder(binding) {
@@ -77,8 +111,20 @@ class CharactersAdapter(
 		}
 	}
 
+	data class MenuItem(
+		val name: String,
+		val action: () -> Unit
+	) {
+		override fun toString(): String = name
+	}
+
 	interface OnAddCharacterListener {
 		fun onClick() { }
+	}
+
+	interface OnMenuItemClickListener {
+		fun edit(characterInfo: CharacterInfo) { }
+		fun delete(characterInfo: CharacterInfo) { }
 	}
 
 }

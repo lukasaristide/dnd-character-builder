@@ -3,7 +3,9 @@
 	<string name="charisma_field_description">Charisma</string>
 	<string name="class_field_description">Class</string>
 	<string name="constitution_field_description">Constitution</string>
+	<string name="delete_text">Delete</string>
 	<string name="dexterity_field_description">Dexterity</string>
+	<string name="edit_text">Edit</string>
 	<string name="fill_necessary_fields_text">Please fill all necessary fields</string>
 	<string name="import_item_text">Import</string>
 	<string name="clear_db_text">Clear DB</string>

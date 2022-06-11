@@ -1,7 +1,7 @@
 #include "ClassParser.h"
 
 #include <boost/json/error.hpp>
-#include <boost/json/parse.hpp.>
+#include <boost/json/parse.hpp>
 #include <boost/json/serialize.hpp>
 #include <iostream>
 
