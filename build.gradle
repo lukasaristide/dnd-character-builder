@@ -9,3 +9,10 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task cleanCmake(type: Delete) {
+    group = 'Build'
+    description = 'Deletes the persistent Cmake build directory.'
+    // TODO Path should not be hard-coded
+    delete "$rootDir/app/.cxx"
+}

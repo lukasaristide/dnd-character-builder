@@ -34,3 +34,6 @@ local.properties
 
 # C++ build files
 /app/.cxx/
+
+# Vim swap files
+.*.swp
