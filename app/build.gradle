@@ -5,6 +5,23 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
+task copyResources(type: Copy) {
+    group = 'Build'
+    if (project.hasProperty('Project.defaultResourcesLanguage')) {
+        // TODO In this path neither "app" nor "main" should be hardcoded
+        def dir = "$rootDir/app/src/main/res"
+        def language = project.property('Project.defaultResourcesLanguage')
+        // TODO Make sure the directory and file exist?
+        from "$dir/values-$language"
+        into "$dir/values"
+        include('strings.xml')
+    }
+}
+
+tasks.matching { it.name.contains('Resources') && it.name != 'copyResources' }.all { task ->
+    task.dependsOn copyResources
+}
+
 ext {
     BOOST_ROOT = "C:\\Users\\luk20\\boost_1_79_0"
 }
@@ -65,7 +82,6 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
