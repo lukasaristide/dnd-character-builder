@@ -6,7 +6,7 @@
 namespace cpp_parser {
     class RaceParser {
     public:
-        std::vector<std::string> ParseRace(std::string input) const;
+        static std::vector<std::string> ParseRace(std::string input);
     };
 }
 

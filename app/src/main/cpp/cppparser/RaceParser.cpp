@@ -9,13 +9,13 @@
 
 #include "Keys.h"
 
-std::vector<std::string> cpp_parser::RaceParser::ParseRace(std::string input) const {
+std::vector<std::string> cpp_parser::RaceParser::ParseRace(std::string input) {
     {
         std::string processed;
         std::stack<char> brackets;
         const auto indexBegin = input.find(RACE);
 
-        for (auto index = input.find("[", indexBegin); index < input.size(); ++index)
+        for (auto index = input.find('[', indexBegin); index < input.size(); ++index)
         {
             const char c = input[index];
             switch (c) {
@@ -47,6 +47,7 @@ std::vector<std::string> cpp_parser::RaceParser::ParseRace(std::string input) co
     if (errorCode)
     {
         std::cerr << errorCode.message() << std::endl;
+        return {};
     }
     std::vector<std::string> names;
     try {

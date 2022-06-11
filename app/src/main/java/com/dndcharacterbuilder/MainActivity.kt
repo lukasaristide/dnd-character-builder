@@ -32,11 +32,15 @@ import kotlinx.serialization.json.Json
 
 import com.dndcharacterbuilder.databinding.ActivityMainBinding
 import com.dndcharacterbuilder.database.AppDatabase
+import com.dndcharacterbuilder.database.Class
 import com.dndcharacterbuilder.database.Race
+import com.dndcharacterbuilder.jsonloader.GetClass
+import com.dndcharacterbuilder.jsonloader.GetClassFileNamesFromIndexFile
 import com.dndcharacterbuilder.jsonloader.GetRaces
 import com.dndcharacterbuilder.ui.bitmaputils.*
 import com.dndcharacterbuilder.ui.main.CharactersFragment
 import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
+import java.nio.charset.Charset
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -114,12 +118,28 @@ class MainActivity : AppCompatActivity() {
                         val urlBase = urlAdress.text.toString()
                         try {
                             thread {
-                                val racesContent = URL(urlBase + "races.json").readText()
+                                val charsetForFetch = Charset.forName("US-ASCII")
+                                Log.d("GET FILENAME", "races.json")
+                                val racesContent = URL(urlBase + "races.json").readText(charsetForFetch)
                                 val jsons = GetRaces(racesContent)
                                 for (race in jsons){
                                     Log.d("DB", race)
                                     database.raceDao().insert(Json.decodeFromString<Race>(race))
                                 }
+
+                                val urlBaseForClass = urlBase + "class/"
+                                Log.d("GET FILENAME", "index.json")
+                                val classIndexContent = URL(urlBaseForClass + "index.json").readText(charsetForFetch)
+                                val classFileNames = GetClassFileNamesFromIndexFile(classIndexContent)
+                                for (filename in classFileNames){
+                                    Log.d("GET FILENAME", filename)
+                                    val classContent = URL(urlBaseForClass + filename).readText(charsetForFetch)
+                                    val parsedClass = GetClass(classContent)
+                                    if (parsedClass == "")
+                                        continue
+                                    database.classDao().insert(Json.decodeFromString<Class>(parsedClass))
+                                }
+
                             }.join()
                         }
                         catch (e : Exception){
