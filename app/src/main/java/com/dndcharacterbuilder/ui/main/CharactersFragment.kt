@@ -1,5 +1,6 @@
 package com.dndcharacterbuilder.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,7 @@ import androidx.room.Room
 
 import kotlin.concurrent.thread
 
+import com.dndcharacterbuilder.MainActivity
 import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.database.CharacterDao
 import com.dndcharacterbuilder.database.CharacterInfo
@@ -50,10 +52,20 @@ class CharactersFragment : Fragment() {
                     binding.charactersList.adapter = CharactersAdapter(
                         it,
                         characters,
-                        object : CharactersAdapter.OnAddCharacterListener {
-                            override fun onClick() {
+                        object : CharactersAdapter.OnItemClickListener {
+                            override fun addCharacter() {
                                 startActivity(Intent(context, AddEditCharacterActivity::class.java))
                             }
+
+							override fun onCharacterChosen(characterId: Int) {
+								activity?.let { activity ->
+									val prefs = activity.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+									prefs.edit().putInt(MainActivity.KEY_CHARACTER_ID, characterId).apply()
+									if (activity is MainActivity) {
+										activity.notifyCharacterChanged()
+									}
+								}
+							}
                         },
                         object : CharactersAdapter.OnMenuItemClickListener {
                             override fun delete(characterInfo: CharacterInfo) {

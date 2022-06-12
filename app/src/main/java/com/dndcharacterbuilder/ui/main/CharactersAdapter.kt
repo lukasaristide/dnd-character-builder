@@ -21,7 +21,7 @@ import com.dndcharacterbuilder.databinding.ItemCharacterCardBinding
 class CharactersAdapter(
 	private val context: Context,
 	private val characters: List<CharacterInfo>,
-	private val addListener: OnAddCharacterListener = object : OnAddCharacterListener { },
+	private val itemListener: OnItemClickListener = object : OnItemClickListener { },
 	private val menuListener: OnMenuItemClickListener = object : OnMenuItemClickListener { }
 ) : RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
 
@@ -89,23 +89,24 @@ class CharactersAdapter(
 		)
 
 		init {
+			binding.root.setOnClickListener { itemListener.onCharacterChosen(getAdapterItem().characterId) }
 			menu.setAdapter(ArrayAdapter(context, R.layout.popup_menu_item, menuItems))
-      menu.anchorView = binding.root
-      menu.isModal = true
-      menu.setOnItemClickListener({ parent, _, position, _ ->
-        (parent.getItemAtPosition(position) as? MenuItem)?.let { it.action() }
-        menu.dismiss()
-      })
-      binding.root.setOnLongClickListener(View.OnLongClickListener {
-        menu.show()
-        false
-      })
+			menu.anchorView = binding.root
+			menu.isModal = true
+			menu.setOnItemClickListener({ parent, _, position, _ ->
+				(parent.getItemAtPosition(position) as? MenuItem)?.let { it.action() }
+				menu.dismiss()
+			})
+			binding.root.setOnLongClickListener(View.OnLongClickListener {
+				menu.show()
+				false
+			})
 		}
 	}
 
 	inner class AddCharacterViewHolder(binding: ItemAddCharacterCardBinding) : ViewHolder(binding) {
 		init {
-			binding.root.setOnClickListener { addListener.onClick() }
+			binding.root.setOnClickListener { itemListener.addCharacter() }
 		}
 	}
 
@@ -116,8 +117,9 @@ class CharactersAdapter(
 		override fun toString(): String = name
 	}
 
-	interface OnAddCharacterListener {
-		fun onClick() { }
+	interface OnItemClickListener {
+		fun addCharacter() { }
+		fun onCharacterChosen(characterId: Int) { }
 	}
 
 	interface OnMenuItemClickListener {

@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
             System.loadLibrary("dndcharacterbuilder")
         }
 
+        const val KEY_CHARACTER_ID = "characterId"
+        const val SHARED_PREFS_NAME = "preferences"
+
         const val charactersFragmentTag: String = "characters"
     }
 
@@ -55,12 +58,15 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private val sectionsPagerAdapter by lazy {
+        SectionsPagerAdapter(this, supportFragmentManager)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
@@ -175,6 +181,11 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun notifyCharacterChanged() {
+        sectionsPagerAdapter.notifyDataSetChanged()
+        closeFab(binding.fab)
     }
 
     private fun expandFab(fab: FloatingActionButton) {
