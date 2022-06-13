@@ -16,6 +16,7 @@ import com.dndcharacterbuilder.MainActivity
 import com.dndcharacterbuilder.R
 import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.databinding.FragmentBasicDataBinding
+import com.dndcharacterbuilder.ui.utils.getModifier
 import kotlin.concurrent.thread
 
 class BasicDataFragment : Fragment() {
@@ -45,8 +46,23 @@ class BasicDataFragment : Fragment() {
 					AppDatabase.databaseName
 				).build()
 			}
-			binding.textView.text = "Current character name: " + (database.characterDao().getInfo(id)?.name
-				?: "(not selected)")
+			val characterInfo = database.characterDao().getInfo(id)
+			if (characterInfo == null){
+				binding.name.text = "(no character selected)"
+				binding.strengthVal.text = ""
+				binding.dexterityVal.text = ""
+				binding.constitutionVal.text = ""
+				binding.intelligenceVal.text = ""
+				binding.charismaVal.text = ""
+				return@thread
+			}
+			binding.name.text = "${characterInfo.name}, ${characterInfo.cclass}"
+			binding.strengthVal.text = "${characterInfo.strength} (${getModifier(characterInfo.strength)})"
+			binding.dexterityVal.text = "${characterInfo.dexterity} (${getModifier(characterInfo.dexterity)})"
+			binding.constitutionVal.text = "${characterInfo.constitution} (${getModifier(characterInfo.constitution)})"
+			binding.intelligenceVal.text = "${characterInfo.intelligence} (${getModifier(characterInfo.intelligence)})"
+			binding.wisdomVal.text = "${characterInfo.wisdom} (${getModifier(characterInfo.wisdom)})"
+			binding.charismaVal.text = "${characterInfo.charisma} (${getModifier(characterInfo.charisma)})"
 		}.join()
 
 		return binding.root
