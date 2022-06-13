@@ -1,6 +1,7 @@
 package com.dndcharacterbuilder
 
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.*
@@ -126,6 +127,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     clearDB(database)
                     runOnUiThread { Toast.makeText(this, "Database cleared!", Toast.LENGTH_SHORT).show() }
+                    getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
                 }.join()
                 true
             }

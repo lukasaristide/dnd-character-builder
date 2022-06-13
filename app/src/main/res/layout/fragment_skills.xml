@@ -5,53 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:id="@+id/skills_table"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:stretchColumns="*"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-        <TableRow
-            android:id="@+id/skill_acrobatics"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
+            <TableLayout
+                android:id="@+id/skills_table"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:stretchColumns="*" />
+        </LinearLayout>
+    </ScrollView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/acrobatics"
-                android:textAlignment="center" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nonproficient" />
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/proficient" />
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/expertise" />
-            </RadioGroup>
-        </TableRow>
-
-    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

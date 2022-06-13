@@ -9,8 +9,10 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.content.edit
 import androidx.core.view.get
 import androidx.core.view.iterator
+import androidx.core.view.size
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +24,7 @@ import com.dndcharacterbuilder.R
 import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.databinding.FragmentBasicDataBinding
 import com.dndcharacterbuilder.databinding.FragmentSkillsBinding
+import com.dndcharacterbuilder.databinding.SkillsTableRowBinding
 import com.dndcharacterbuilder.ui.utils.Skills
 import com.dndcharacterbuilder.ui.utils.getModifier
 import com.dndcharacterbuilder.ui.utils.getProficiencyBonus
@@ -41,10 +44,11 @@ class SkillsFragment : Fragment() {
     ): View? {
         _binding = FragmentSkillsBinding.inflate(inflater, container, false)
 
-        val id = if (activity != null) {
-            val prefs = activity!!.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-            prefs.getInt(MainActivity.KEY_CHARACTER_ID, 0)
+        val prefs = if (activity != null) {
+            activity!!.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
         } else return binding.root
+
+        val id = prefs.getInt(MainActivity.KEY_CHARACTER_ID, 0)
 
         thread {
             val database: AppDatabase by lazy {
@@ -54,10 +58,13 @@ class SkillsFragment : Fragment() {
                     AppDatabase.databaseName
                 ).build()
             }
-            val characterInfo = database.characterDao().getInfo(id)
-            if (characterInfo == null){
-                (binding.skillAcrobatics[0] as TextView).text = ""
-                return@thread
+            val characterInfo = database.characterDao().getInfo(id) ?: return@thread
+            for (skill in Skills.values()){
+                if (skill == Skills.UNDEFINED)
+                    break
+                binding.skillsTable.addView(layoutInflater.inflate(R.layout.skills_table_row, null))
+                ((binding.skillsTable[binding.skillsTable.size-1] as TableRow)[1] as TextView).text =
+                    Skills.getNameFromSkill(skill, requireContext())
             }
             for (row in binding.skillsTable){
                 val tableRow = row as TableRow
@@ -70,16 +77,15 @@ class SkillsFragment : Fragment() {
                         (tableRow[0] as TextView).text =
                             if (modifier < 0) "$modifier"
                             else "+$modifier"
+                        prefs.edit().putInt(MainActivity.KEY_CHARACTER_ID + name, i).apply()
                     }
                 }
-                val modifier = characterInfo.getSkillModifier(skill)
-                (tableRow[0] as TextView).text =
-                    if (modifier < 0) "$modifier"
-                    else "+$modifier"
+                val proficiencyBonus = prefs.getInt(MainActivity.KEY_CHARACTER_ID + name, 0)
+                var button = ((tableRow[2] as RadioGroup)[proficiencyBonus] as RadioButton)
+                button.callOnClick()
+                button.isChecked = true
             }
-            (binding.skillAcrobatics[0] as TextView).text = "${characterInfo.getSkillModifier(Skills.ACROBATICS)}"
         }.join()
-
         return binding.root
     }
 
