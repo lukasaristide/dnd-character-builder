@@ -58,7 +58,7 @@ std::vector<std::string> cpp_parser::RaceParser::ParseRace(std::string input) {
             const auto& jsonObjectRace = jsonRace.as_object();
             const auto& name = jsonObjectRace.at(NAME).as_string();
             const auto& source = jsonObjectRace.at(SOURCE).as_string();
-            names.push_back(name.c_str() + std::string("-") + source.c_str());
+            names.push_back(name.c_str() + std::string(" (") + source.c_str() + ")");
         }
         for (auto& name : names)
         {

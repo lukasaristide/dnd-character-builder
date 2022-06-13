@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.database.CharacterDao
 import com.dndcharacterbuilder.database.CharacterInfo
 import com.dndcharacterbuilder.databinding.FragmentCharactersBinding
+import com.dndcharacterbuilder.ui.utils.Skills
 
 class CharactersFragment : Fragment() {
 
@@ -72,6 +74,14 @@ class CharactersFragment : Fragment() {
                                 thread {
                                     val character = characterDao!!.getById(characterInfo.characterId)
                                     if (character != null) {
+                                        val prefsEditor = context!!.getSharedPreferences(MainActivity.SHARED_PREFS_NAME,
+                                            Context.MODE_PRIVATE).edit()
+                                        prefsEditor.remove(character.id.toString())
+                                        for (skill in Skills.values()){
+                                            val idPrefs = character.id.toString() + Skills.getNameFromSkill(skill, context!!)
+                                            Log.d("PREFS RM", idPrefs)
+                                            prefsEditor.remove(idPrefs).apply()
+                                        }
                                         characterDao!!.delete(character)
                                     }
                                     runOnUiThread {

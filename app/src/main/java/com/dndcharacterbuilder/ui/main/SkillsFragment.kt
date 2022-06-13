@@ -2,6 +2,7 @@ package com.dndcharacterbuilder.ui.main
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,10 +78,12 @@ class SkillsFragment : Fragment() {
                         (tableRow[0] as TextView).text =
                             if (modifier < 0) "$modifier"
                             else "+$modifier"
-                        prefs.edit().putInt(MainActivity.KEY_CHARACTER_ID + name, i).apply()
+                        val idPrefs = id.toString() + name
+                        Log.d("PREFS ADD", idPrefs)
+                        prefs.edit().putInt(idPrefs, i).apply()
                     }
                 }
-                val proficiencyBonus = prefs.getInt(MainActivity.KEY_CHARACTER_ID + name, 0)
+                val proficiencyBonus = prefs.getInt(id.toString() + name, 0)
                 var button = ((tableRow[2] as RadioGroup)[proficiencyBonus] as RadioButton)
                 button.callOnClick()
                 button.isChecked = true

@@ -56,6 +56,7 @@ class AddEditCharacterActivity : AppCompatActivity() {
 			thread threadStart@ {
 				val characterInfo = database.characterDao().getInfo(characterId) ?: return@threadStart
 				binding.nameField.setText(characterInfo.name)
+				binding.levelField.setText(characterInfo.level.toString())
 
 				binding.raceField.text = characterInfo.race
 				binding.classField.text = characterInfo.cclass
