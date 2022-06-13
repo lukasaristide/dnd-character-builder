@@ -49,6 +49,8 @@ class BasicDataFragment : Fragment() {
 			val characterInfo = database.characterDao().getInfo(id)
 			if (characterInfo == null){
 				binding.name.text = "(no character selected)"
+				binding.race.text = "---"
+				binding.classAndLevel.text = "---"
 				binding.strengthVal.text = ""
 				binding.dexterityVal.text = ""
 				binding.constitutionVal.text = ""
@@ -56,7 +58,9 @@ class BasicDataFragment : Fragment() {
 				binding.charismaVal.text = ""
 				return@thread
 			}
-			binding.name.text = "${characterInfo.name}, ${characterInfo.cclass} ${characterInfo.level}"
+			binding.name.text = characterInfo.name
+			binding.race.text = characterInfo.race
+			binding.classAndLevel.text = "${characterInfo.cclass} (${characterInfo.level})"
 			binding.strengthVal.text = "${characterInfo.strength} (${getModifier(characterInfo.strength)})"
 			binding.dexterityVal.text = "${characterInfo.dexterity} (${getModifier(characterInfo.dexterity)})"
 			binding.constitutionVal.text = "${characterInfo.constitution} (${getModifier(characterInfo.constitution)})"
