@@ -1,6 +1,10 @@
 package com.dndcharacterbuilder.database
 
+import android.util.Log
 import androidx.room.DatabaseView
+import com.dndcharacterbuilder.ui.utils.SkillToAbility
+import com.dndcharacterbuilder.ui.utils.Skills
+import com.dndcharacterbuilder.ui.utils.getModifier
 
 @DatabaseView(
     """
@@ -24,4 +28,24 @@ data class CharacterInfo(
     val charisma: Int,
     val race: String,
     val cclass: String
-)
+){
+    fun getSkillModifier(skill: Skills): Int {
+        return if (SkillToAbility.strSkills.contains(skill))
+            getModifier(strength)
+        else if (SkillToAbility.dexSkills.contains(skill))
+            getModifier(dexterity)
+        else if (SkillToAbility.conSkills.contains(skill))
+            getModifier(constitution)
+        else if (SkillToAbility.intSkills.contains(skill))
+            getModifier(intelligence)
+        else if (SkillToAbility.wisSkills.contains(skill))
+            getModifier(wisdom)
+        else if (SkillToAbility.chaSkills.contains(skill))
+            getModifier(charisma)
+        else {
+            Log.d("ERR", "Couldn't find ability for skill ${skill.name}")
+            0
+        }
+    }
+
+}

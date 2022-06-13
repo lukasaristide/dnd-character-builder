@@ -139,36 +139,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun expandFab(fab: FloatingActionButton) {
-        if (fab.isExpanded()) {
+        if (fab.isExpanded) {
             return
         }
         // Hide fab so it is not included in the blurred background
-        fab.setVisibility(View.GONE)
+        fab.visibility = View.GONE
         supportFragmentManager.findFragmentByTag(charactersFragmentTag)?.getView()?.background = BitmapDrawable(
             resources,
             getBitmapFromView(binding.root)
                 .blur(this@MainActivity, 5f)
                 .bleach(140)
         )
-        fab.setVisibility(View.VISIBLE)
+        fab.visibility = View.VISIBLE
         binding.root.invalidate()
-        fab.setExpanded(true)
+        fab.isExpanded = true
         // TODO The programmatically set background does not behave
         // as expected and thus the need. How to fix this?
         // Problem: the bitmap appears behind all views, not as
         // background of the view. When testing ColorDrawable instead,
         // nothing happens.
-        binding.tabs.setVisibility(View.INVISIBLE)
-        binding.viewPager.setVisibility(View.INVISIBLE)
+        binding.tabs.visibility = View.INVISIBLE
+        binding.viewPager.visibility = View.INVISIBLE
     }
 
     private fun closeFab(fab: FloatingActionButton) {
-        if (!fab.isExpanded()) {
+        if (!fab.isExpanded) {
             return
         }
-        binding.tabs.setVisibility(View.VISIBLE)
-        binding.viewPager.setVisibility(View.VISIBLE)
-        binding.fab.setExpanded(false)
+        binding.tabs.visibility = View.VISIBLE
+        binding.viewPager.visibility = View.VISIBLE
+        binding.fab.isExpanded = false
         supportFragmentManager.findFragmentByTag(charactersFragmentTag)?.getView()?.background = null
         recreate()
     }

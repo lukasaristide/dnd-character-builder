@@ -22,4 +22,25 @@
 	<string name="wisdom_short_field_description">WIS</string>
 	<string name="charisma_short_field_description">CHA</string>
     <string name="level_field_description">Level</string>
+    <string name="acrobatics">Acrobatics</string>
+	<string name="animal_handling">Animal Handling</string>
+	<string name="arcana">Arcana</string>
+	<string name="athletics">Athletics</string>
+	<string name="deception">Deception</string>
+	<string name="history">History</string>
+	<string name="insight">Insight</string>
+	<string name="intimidation">Intimidation</string>
+	<string name="investigation">Investigation</string>
+	<string name="medicine">Medicine</string>
+	<string name="nature">Nature</string>
+	<string name="perception">Perception</string>
+	<string name="performance">Performance</string>
+	<string name="persuasion">Persuasion</string>
+	<string name="religion">Religion</string>
+	<string name="sleight_of_hand">Sleight of Hand</string>
+	<string name="stealth">Stealth</string>
+	<string name="survival">Survival</string>
+    <string name="proficient">proficient</string>
+	<string name="nonproficient">nonproficient</string>
+	<string name="expertise">expertise</string>
 </resources>

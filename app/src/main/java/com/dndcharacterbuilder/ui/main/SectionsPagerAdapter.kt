@@ -23,9 +23,8 @@ private val TAB_TITLES = arrayOf(
 class SectionsPagerAdapter(private val activity: AppCompatActivity, fm: FragmentManager)
     : FragmentStateAdapter(fm, activity.lifecycle) {
     val items = arrayOf(
-        FragmentItem(
-            BasicDataFragment()
-        )
+        FragmentItem(BasicDataFragment()),
+        FragmentItem(SkillsFragment())
     )
 
     override fun createFragment(position: Int): Fragment {
