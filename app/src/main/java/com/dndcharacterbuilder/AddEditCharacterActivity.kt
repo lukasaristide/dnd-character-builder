@@ -54,10 +54,7 @@ class AddEditCharacterActivity : AppCompatActivity() {
 
 		if (savedInstanceState == null && characterId != 0) {
 			thread threadStart@ {
-				val characterInfo = database.characterDao().getInfo(characterId)
-				if (characterInfo == null) {
-					return@threadStart
-				}
+				val characterInfo = database.characterDao().getInfo(characterId) ?: return@threadStart
 				binding.nameField.setText(characterInfo.name)
 
 				binding.raceField.text = characterInfo.race
@@ -81,6 +78,7 @@ class AddEditCharacterActivity : AppCompatActivity() {
 				try {
 					val character = Character(
 						name = requireString(binding.nameField),
+						level = requireInt(binding.levelField),
 
 						race = database.raceDao().getDetail(requireString(binding.raceField))!!.id,
 						cclass = database.classDao().getDetail(requireString(binding.classField))!!.id,

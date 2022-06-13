@@ -3,6 +3,6 @@
 	tools:ignore="MissingTranslation"
 	>
 	<string name="app_name">DnD Character Builder</string>
-	<string name="tab_text_1">Tab 1</string>
-	<string name="tab_text_2">Tab 2</string>
+	<string name="tab_text_1">Basic info</string>
+	<string name="tab_text_2">Skills</string>
 </resources>

@@ -4,7 +4,7 @@ import androidx.room.DatabaseView
 
 @DatabaseView(
     """
-    select c.id as characterId, c.name,
+    select c.id as characterId, c.name, c.level,
         c.strength, c.dexterity, c.constitution, c.intelligence, c.wisdom, c.charisma,
         r.name as race, k.name as cclass
     from character as c
@@ -15,6 +15,7 @@ import androidx.room.DatabaseView
 data class CharacterInfo(
     val characterId: Int,
     val name: String,
+    val level: Int,
     val strength: Int,
     val dexterity: Int,
     val constitution: Int,

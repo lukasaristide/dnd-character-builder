@@ -29,7 +29,7 @@ class SectionsPagerAdapter(private val activity: AppCompatActivity, fm: Fragment
     )
 
     override fun createFragment(position: Int): Fragment {
-        activity.getSupportFragmentManager().commit {
+        activity.supportFragmentManager.commit {
             detach(items[position].fragment)
             attach(items[position].fragment)
         }

@@ -28,6 +28,21 @@
 			android:minHeight="48dp" />
 
 		<TextView
+			android:id="@+id/textView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:labelFor="@id/level_field"
+			android:text="@string/level_field_description" />
+
+		<EditText
+			android:id="@+id/level_field"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:minHeight="48dp" />
+
+		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:labelFor="@id/race_field"
@@ -49,15 +64,13 @@
 			android:text="@string/class_field_description" />
 
 		<TextView
-			android:background="@drawable/popup_button_background"
 			android:id="@+id/class_field"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginVertical="8dp"
-			android:layout_width="match_parent"
+			android:background="@drawable/popup_button_background"
 			android:padding="8dp"
-			android:textColor="@android:color/black"
-			android:textSize="16sp"
-			/>
+			android:textSize="16sp" />
 
 		<TextView
 			android:layout_width="match_parent"

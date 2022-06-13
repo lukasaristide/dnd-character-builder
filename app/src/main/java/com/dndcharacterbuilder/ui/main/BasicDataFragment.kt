@@ -56,7 +56,7 @@ class BasicDataFragment : Fragment() {
 				binding.charismaVal.text = ""
 				return@thread
 			}
-			binding.name.text = "${characterInfo.name}, ${characterInfo.cclass}"
+			binding.name.text = "${characterInfo.name}, ${characterInfo.cclass} ${characterInfo.level}"
 			binding.strengthVal.text = "${characterInfo.strength} (${getModifier(characterInfo.strength)})"
 			binding.dexterityVal.text = "${characterInfo.dexterity} (${getModifier(characterInfo.dexterity)})"
 			binding.constitutionVal.text = "${characterInfo.constitution} (${getModifier(characterInfo.constitution)})"

@@ -24,6 +24,7 @@ import androidx.room.PrimaryKey
 )
 data class Character(
     var name: String,
+    var level: Int,
     var strength: Int,
     var dexterity: Int,
     var constitution: Int,
