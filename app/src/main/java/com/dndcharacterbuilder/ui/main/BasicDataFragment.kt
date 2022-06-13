@@ -18,6 +18,7 @@ import com.dndcharacterbuilder.R
 import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.databinding.FragmentBasicDataBinding
 import com.dndcharacterbuilder.ui.utils.getModifier
+import com.dndcharacterbuilder.ui.utils.getStrModifier
 import kotlin.concurrent.thread
 
 class BasicDataFragment : Fragment() {
@@ -65,6 +66,7 @@ class BasicDataFragment : Fragment() {
 				}
 				return@thread
 			}
+
 			activity!!.runOnUiThread {
 				if (_binding == null) return@runOnUiThread
 				binding.name.text = characterInfo.name

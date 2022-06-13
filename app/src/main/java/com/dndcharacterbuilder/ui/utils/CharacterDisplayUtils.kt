@@ -1,11 +1,13 @@
 package com.dndcharacterbuilder.ui.utils
 
 fun getModifier(statValue: Int): Int {
-    val modifier = statValue / 2 - 5
-    return if (modifier >= 0)
-        modifier
-    else
-        modifier
+    return statValue / 2 - 5
+}
+
+fun getStrModifier(statValue: Int): String {
+    val modifier = getModifier(statValue)
+    return  if (modifier < 0) modifier.toString()
+            else "+${modifier}"
 }
 
 fun getProficiencyBonus(level: Int): Int{
