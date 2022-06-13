@@ -15,4 +15,10 @@
 	<string name="strength_field_description">Strength</string>
 	<string name="race_field_description">Race</string>
 	<string name="wisdom_field_description">Wisdom</string>
+    <string name="strength_short_field_description">STR</string>
+	<string name="dexterity_short_field_description">DEX</string>
+	<string name="constitution_short_field_description">CON</string>
+	<string name="intelligence_short_field_description">INT</string>
+	<string name="wisdom_short_field_description">WIS</string>
+	<string name="charisma_short_field_description">CHA</string>
 </resources>

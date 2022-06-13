@@ -1,0 +1,152 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<TextView
+		android:id="@+id/name"
+		android:layout_width="671dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="32dp"
+		android:layout_marginEnd="32dp"
+		android:textAlignment="center"
+		android:textAllCaps="false"
+		android:textSize="34sp"
+		android:textStyle="bold|italic"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.5"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<TableLayout
+		android:id="@+id/stats"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="32dp"
+		android:stretchColumns="*"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/name">
+
+		<TableRow
+			android:id="@+id/names"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/strength"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/strength_short_field_description"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/dexterity"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/dexterity_short_field_description"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/constitution"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/constitution_short_field_description"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+		</TableRow>
+
+		<TableRow
+			android:id="@+id/values"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/strengthVal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/dexterityVal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/constitutionVal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+		</TableRow>
+
+		<TableRow
+			android:id="@+id/names2"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/intelligence"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/intelligence_short_field_description"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/wisdom"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/wisdom_short_field_description"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/charisma"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/charisma_short_field_description"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+		</TableRow>
+
+		<TableRow
+			android:id="@+id/values2"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/intelligenceVal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/wisdomVal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+
+			<TextView
+				android:id="@+id/charismaVal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="24sp" />
+		</TableRow>
+
+	</TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
