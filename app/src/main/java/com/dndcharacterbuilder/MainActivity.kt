@@ -108,8 +108,12 @@ class MainActivity : AppCompatActivity() {
                 with (builder) {
                     setTitle("Provide URL for data import:")
                     setPositiveButton("OK") { _, _ ->
-                        importDB(database, urlAddress.text.toString())
-                        messagePrinter("Database import done!")
+                        if (importDB(database, urlAddress.text.toString())) {
+                            messagePrinter("Database import done!")
+                        }
+                        else {
+                            messagePrinter("Could not import database")
+                        }
                     }
                     setNegativeButton("Cancel") { _, _ -> }
                     setView(dialogLayout.root)

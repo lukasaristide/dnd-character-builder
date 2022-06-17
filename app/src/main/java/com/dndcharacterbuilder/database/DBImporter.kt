@@ -11,10 +11,11 @@ import java.net.URL
 import java.nio.charset.Charset
 import kotlin.concurrent.thread
 
-fun importDB(database: AppDatabase, urlBase: String){
+fun importDB(database: AppDatabase, urlBase: String): Boolean {
     Log.d("URL", "Got URL: $urlBase")
-    try {
-        thread {
+    var success: Boolean = true
+    thread {
+        try {
             val charsetForFetch = Charset.forName("US-ASCII")
             Log.d("GET FILENAME", DBImportConsts.RACES_FILENAME)
             val racesContent = URL(urlBase + DBImportConsts.RACES_FILENAME).readText(charsetForFetch)
@@ -39,9 +40,11 @@ fun importDB(database: AppDatabase, urlBase: String){
                 database.classDao().insert(Json.decodeFromString<Class>(parsedClass))
             }
 
-        }.join()
-    }
-    catch (e : Exception){
-        Log.d("ERR", e.toString())
-    }
+        }
+        catch (e : Exception){
+            Log.d("ERR", e.toString())
+            success = false
+        }
+    }.join()
+    return success
 }
