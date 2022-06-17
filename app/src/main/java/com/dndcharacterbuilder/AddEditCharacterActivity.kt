@@ -19,6 +19,8 @@ import com.dndcharacterbuilder.databinding.ActivityAddCharacterBinding
 class AddEditCharacterActivity : AppCompatActivity() {
 	companion object {
 		const val EXTRA_ID: String = "characterId"
+		private const val BUNDLE_KEY_CLASS: String = "class"
+		private const val BUNDLE_KEY_RACE: String = "race"
 	}
 
 	private val binding: ActivityAddCharacterBinding by lazy {
@@ -52,7 +54,11 @@ class AddEditCharacterActivity : AppCompatActivity() {
 			racesList
 		}
 
-		if (savedInstanceState == null && characterId != 0) {
+		if (savedInstanceState != null) {
+			binding.raceField.text = savedInstanceState.getCharSequence(BUNDLE_KEY_RACE) ?: ""
+			binding.classField.text = savedInstanceState.getCharSequence(BUNDLE_KEY_CLASS) ?: ""
+		}
+		else if (characterId != 0) {
 			thread threadStart@ {
 				val characterInfo = database.characterDao().getInfo(characterId) ?: return@threadStart
 				binding.nameField.setText(characterInfo.name)
@@ -107,6 +113,12 @@ class AddEditCharacterActivity : AppCompatActivity() {
 				}
 			}
 		}
+	}
+
+	override fun onSaveInstanceState (savedInstanceState: Bundle) {
+		super.onSaveInstanceState(savedInstanceState)
+		savedInstanceState.putCharSequence(BUNDLE_KEY_RACE, binding.raceField.text)
+		savedInstanceState.putCharSequence(BUNDLE_KEY_CLASS, binding.classField.text)
 	}
 
 	private fun createPopupList (field: TextView, items: List<String>): ListPopupWindow {
