@@ -63,7 +63,7 @@ class SkillsFragment : Fragment() {
             for (skill in Skills.values()){
                 if (skill == Skills.UNDEFINED)
                     break
-                binding.skillsTable.addView(layoutInflater.inflate(R.layout.skills_table_row, null))
+                binding.skillsTable.addView(SkillsTableRowBinding.inflate(layoutInflater).root)
                 ((binding.skillsTable[binding.skillsTable.size-1] as TableRow)[1] as TextView).text =
                     Skills.getNameFromSkill(skill, requireContext())
             }

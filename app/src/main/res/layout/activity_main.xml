@@ -31,14 +31,15 @@
         >
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/characters_list_fab_description"
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-			app:srcCompat="@drawable/ic_person"
-			/>
+            app:srcCompat="@drawable/ic_person"
+            />
 
         <com.google.android.material.circularreveal.CircularRevealFrameLayout
             android:enabled="false"

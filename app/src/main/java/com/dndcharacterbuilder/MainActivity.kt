@@ -22,6 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.concurrent.thread
 
 import com.dndcharacterbuilder.databinding.ActivityMainBinding
+import com.dndcharacterbuilder.databinding.RequestUrlBinding
 import com.dndcharacterbuilder.ui.bitmaputils.*
 import com.dndcharacterbuilder.ui.main.CharactersFragment
 import com.dndcharacterbuilder.ui.main.SectionsPagerAdapter
@@ -94,8 +95,8 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.import_item -> {
                 val builder = AlertDialog.Builder(this)
-                val dialogLayout = layoutInflater.inflate(R.layout.request_url, null)
-                val urlAddress = dialogLayout.findViewById<EditText>(R.id.request_url_text)
+                val dialogLayout = RequestUrlBinding.inflate(layoutInflater)
+                val urlAddress = dialogLayout.requestUrlText
 
                 val database: AppDatabase by lazy {
                     Room.databaseBuilder(this, AppDatabase::class.java, AppDatabase.databaseName)
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                         messagePrinter("Database import done!")
                     }
                     setNegativeButton("Cancel") { _, _ -> }
-                    setView(dialogLayout)
+                    setView(dialogLayout.root)
                     show()
                 }
                 true
