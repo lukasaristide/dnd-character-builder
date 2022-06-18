@@ -134,6 +134,7 @@ class MainActivity : AppCompatActivity() {
                     clearDB(database)
                     runOnUiThread { Toast.makeText(this, "Database cleared!", Toast.LENGTH_SHORT).show() }
                     getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
+                    runOnUiThread { recreate() }
                 }.join()
                 true
             }
