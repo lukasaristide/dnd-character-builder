@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textSize="16sp"
-        android:textColor="@android:color/black"
+        android:textColor="?editTextColor"
         app:layout_constraintTop_toTopOf="parent"
         />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4sp"
         android:layout_width="wrap_content"
-        android:textColor="@android:color/black"
+        android:textColor="?editTextColor"
         app:layout_constraintStart_toEndOf="@id/race_field_label"
         app:layout_constraintTop_toBottomOf="@id/name_field"
         />
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4sp"
         android:layout_width="wrap_content"
-        android:textColor="@android:color/black"
+        android:textColor="?editTextColor"
         app:layout_constraintStart_toEndOf="@id/class_field_label"
         app:layout_constraintTop_toBottomOf="@id/name_field"
         />

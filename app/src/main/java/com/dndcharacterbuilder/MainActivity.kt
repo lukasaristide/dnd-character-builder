@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.*
 import android.widget.EditText
 import android.widget.Toast
@@ -155,7 +156,15 @@ class MainActivity : AppCompatActivity() {
             resources,
             getBitmapFromView(binding.root)
                 .blur(this@MainActivity, 5f)
-                .bleach(140)
+                .tint(140, run {
+                    val typedValue = TypedValue()
+                    if (theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true)) {
+                        typedValue.data
+                    }
+                    else {
+                        resources.getColor(R.color.white)
+                    }
+                })
         )
         fab.visibility = View.VISIBLE
         binding.root.invalidate()

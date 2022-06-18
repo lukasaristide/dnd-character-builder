@@ -3,6 +3,7 @@ package com.dndcharacterbuilder.ui.bitmaputils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
@@ -32,10 +33,10 @@ fun Bitmap.blur (context: Context, radius: Float): Bitmap {
     return this
 }
 
-fun Bitmap.bleach (alpha: Int): Bitmap {
+fun Bitmap.tint (alpha: Int, color: Int): Bitmap {
     val bitmap = this
     val paint = Paint()
-    paint.setARGB(alpha, 255, 255, 255)
+    paint.setARGB(alpha, Color.red(color), Color.green(color), Color.blue(color))
     paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
     Canvas(this).apply {
         drawBitmap(bitmap, 0f, 0f, null)
