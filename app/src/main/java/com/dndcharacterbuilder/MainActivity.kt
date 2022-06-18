@@ -103,20 +103,20 @@ class MainActivity : AppCompatActivity() {
                     Room.databaseBuilder(this, AppDatabase::class.java, AppDatabase.databaseName)
                         .build()
                 }
-                val messagePrinter = { message: String ->
+                val messagePrinter = { message: Int ->
                     runOnUiThread { Toast.makeText(this, message, Toast.LENGTH_SHORT).show() }
                 }
                 with (builder) {
-                    setTitle("Provide URL for data import:")
-                    setPositiveButton("OK") { _, _ ->
+                    setTitle(R.string.import_dialog_title)
+                    setPositiveButton(R.string.ok_button_text) { _, _ ->
                         if (importDB(database, urlAddress.text.toString())) {
-                            messagePrinter("Database import done!")
+                            messagePrinter(R.string.database_imported_msg)
                         }
                         else {
-                            messagePrinter("Could not import database")
+                            messagePrinter(R.string.database_not_imported_msg)
                         }
                     }
-                    setNegativeButton("Cancel") { _, _ -> }
+                    setNegativeButton(R.string.cancel_button_text) { _, _ -> }
                     setView(dialogLayout.root)
                     show()
                 }
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                         ).build()
                     }
                     clearDB(database)
-                    runOnUiThread { Toast.makeText(this, "Database cleared!", Toast.LENGTH_SHORT).show() }
+                    runOnUiThread { Toast.makeText(this, R.string.database_cleared_msg, Toast.LENGTH_SHORT).show() }
                     getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
                     runOnUiThread { recreate() }
                 }.join()
