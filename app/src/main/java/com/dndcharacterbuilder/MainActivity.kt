@@ -141,7 +141,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun notifyCharacterChanged() {
-        sectionsPagerAdapter.notifyDataSetChanged()
+        // Right now closeFab also calls recreate, which is sufficient
+        // to update displayed data.
         closeFab(binding.fab)
     }
 

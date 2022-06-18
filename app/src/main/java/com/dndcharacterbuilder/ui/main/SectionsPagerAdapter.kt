@@ -23,16 +23,12 @@ private val TAB_TITLES = arrayOf(
 class SectionsPagerAdapter(private val activity: AppCompatActivity, fm: FragmentManager)
     : FragmentStateAdapter(fm, activity.lifecycle) {
     val items = arrayOf(
-        FragmentItem(BasicDataFragment()),
-        FragmentItem(SkillsFragment())
+        BasicDataFragment(),
+        SkillsFragment()
     )
 
     override fun createFragment(position: Int): Fragment {
-        activity.supportFragmentManager.commit {
-            detach(items[position].fragment)
-            attach(items[position].fragment)
-        }
-        return items[position].fragment
+        return items[position]
     }
 
     fun getPageTitle(position: Int): String {
@@ -40,21 +36,4 @@ class SectionsPagerAdapter(private val activity: AppCompatActivity, fm: Fragment
     }
 
     override fun getItemCount(): Int = items.size
-
-    override fun getItemId(position: Int): Long = items[position].id
-
-    override fun containsItem(itemId: Long): Boolean = items.any { it.id == itemId }
-
-    private var newId: Long = 0
-    inner class FragmentItem(
-        val fragment: Fragment
-    ) {
-        private val _id: Long = ++newId
-        val id: Long
-            get() {
-                val prefs = activity.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-                val characterId = prefs.getInt(MainActivity.KEY_CHARACTER_ID, 0)
-                return characterId * 100 + _id
-            }
-    }
 }
