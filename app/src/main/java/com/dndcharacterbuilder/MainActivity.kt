@@ -109,9 +109,16 @@ class MainActivity : AppCompatActivity() {
                 with (builder) {
                     setTitle(R.string.import_dialog_title)
                     setPositiveButton(R.string.ok_button_text) { _, _ ->
+                        binding.spinningCircle.visibility = View.VISIBLE
                         importDB(database, urlAddress.text.toString(),
-                            onSuccess = { messagePrinter(R.string.database_imported_msg) },
-                            onFailure = { messagePrinter(R.string.database_not_imported_msg) }
+                            onSuccess = {
+                                messagePrinter(R.string.database_imported_msg)
+                                runOnUiThread { binding.spinningCircle.visibility = View.GONE }
+                            },
+                            onFailure = {
+                                messagePrinter(R.string.database_not_imported_msg)
+                                runOnUiThread { binding.spinningCircle.visibility = View.GONE }
+                            }
                         )
                     }
                     setNegativeButton(R.string.cancel_button_text) { _, _ -> }
@@ -121,6 +128,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.clear_db -> {
+                binding.spinningCircle.visibility = View.VISIBLE
                 thread {
                     val database: AppDatabase by lazy {
                         Room.databaseBuilder(

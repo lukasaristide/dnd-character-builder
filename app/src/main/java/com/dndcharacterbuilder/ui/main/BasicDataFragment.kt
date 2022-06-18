@@ -53,6 +53,7 @@ class BasicDataFragment : Fragment() {
 			val characterInfo = database.characterDao().getInfo(id)
 			if (characterInfo == null){
 				activity!!.runOnUiThread {
+					if (_binding == null) return@runOnUiThread
 					binding.name.setText(R.string.no_character_selected_text)
 					binding.race.text = "---"
 					binding.classAndLevel.text = "---"
@@ -65,6 +66,7 @@ class BasicDataFragment : Fragment() {
 				return@thread
 			}
 			activity!!.runOnUiThread {
+				if (_binding == null) return@runOnUiThread
 				binding.name.text = characterInfo.name
 				binding.race.text = characterInfo.race
 				// Is there a way to apply a single annotation to a block of code?

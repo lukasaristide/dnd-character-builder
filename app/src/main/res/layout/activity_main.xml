@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,14 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="6dp"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:layout_below="@id/tabs"
         android:id="@+id/view_pager"
+        android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs"
         />
 
     <!-- TranslationZ is to bring this in front of everything,
@@ -53,4 +54,15 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</RelativeLayout>
+    <ProgressBar
+        android:id="@+id/spinning_circle"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
