@@ -59,15 +59,15 @@ class CharactersFragment : Fragment() {
                                 startActivity(Intent(context, AddEditCharacterActivity::class.java))
                             }
 
-							override fun onCharacterChosen(characterId: Int) {
-								activity?.let { activity ->
-									val prefs = activity.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-									prefs.edit().putInt(MainActivity.KEY_CHARACTER_ID, characterId).apply()
-									if (activity is MainActivity) {
-										activity.notifyCharacterChanged()
-									}
-								}
-							}
+                            override fun onCharacterChosen(characterId: Int) {
+                                activity?.let { activity ->
+                                    val prefs = activity.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                                    prefs.edit().putInt(MainActivity.KEY_CHARACTER_ID, characterId).apply()
+                                    if (activity is MainActivity) {
+                                        activity.notifyCharacterChanged()
+                                    }
+                                }
+                            }
                         },
                         object : CharactersAdapter.OnMenuItemClickListener {
                             override fun delete(characterInfo: CharacterInfo) {

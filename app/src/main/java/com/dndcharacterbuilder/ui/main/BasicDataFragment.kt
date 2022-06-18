@@ -33,11 +33,14 @@ class BasicDataFragment : Fragment() {
 		savedInstanceState: Bundle?
 	): View? {
 		_binding = FragmentBasicDataBinding.inflate(inflater, container, false)
+		return binding.root
+	}
 
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		val id = if (activity != null) {
 			val prefs = activity!!.getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 			prefs.getInt(MainActivity.KEY_CHARACTER_ID, 0)
-		} else return binding.root
+		} else return
 
 		thread {
 			val database: AppDatabase by lazy {
@@ -49,37 +52,39 @@ class BasicDataFragment : Fragment() {
 			}
 			val characterInfo = database.characterDao().getInfo(id)
 			if (characterInfo == null){
-				binding.name.setText(R.string.no_character_selected_text)
-				binding.race.text = "---"
-				binding.classAndLevel.text = "---"
-				binding.strengthVal.text = ""
-				binding.dexterityVal.text = ""
-				binding.constitutionVal.text = ""
-				binding.intelligenceVal.text = ""
-				binding.charismaVal.text = ""
+				activity!!.runOnUiThread {
+					binding.name.setText(R.string.no_character_selected_text)
+					binding.race.text = "---"
+					binding.classAndLevel.text = "---"
+					binding.strengthVal.text = ""
+					binding.dexterityVal.text = ""
+					binding.constitutionVal.text = ""
+					binding.intelligenceVal.text = ""
+					binding.charismaVal.text = ""
+				}
 				return@thread
 			}
-			binding.name.text = characterInfo.name
-			binding.race.text = characterInfo.race
-			// Is there a way to apply a single annotation to a block of code?
-			// In this case, is there a reason to resolve the warning in another way?
-			@SuppressLint("SetTextI18n")
-			binding.classAndLevel.text = "${characterInfo.cclass} (${characterInfo.level})"
-			@SuppressLint("SetTextI18n")
-			binding.strengthVal.text = "${characterInfo.strength} (${getModifier(characterInfo.strength)})"
-			@SuppressLint("SetTextI18n")
-			binding.dexterityVal.text = "${characterInfo.dexterity} (${getModifier(characterInfo.dexterity)})"
-			@SuppressLint("SetTextI18n")
-			binding.constitutionVal.text = "${characterInfo.constitution} (${getModifier(characterInfo.constitution)})"
-			@SuppressLint("SetTextI18n")
-			binding.intelligenceVal.text = "${characterInfo.intelligence} (${getModifier(characterInfo.intelligence)})"
-			@SuppressLint("SetTextI18n")
-			binding.wisdomVal.text = "${characterInfo.wisdom} (${getModifier(characterInfo.wisdom)})"
-			@SuppressLint("SetTextI18n")
-			binding.charismaVal.text = "${characterInfo.charisma} (${getModifier(characterInfo.charisma)})"
-		}.join()
-
-		return binding.root
+			activity!!.runOnUiThread {
+				binding.name.text = characterInfo.name
+				binding.race.text = characterInfo.race
+				// Is there a way to apply a single annotation to a block of code?
+				// In this case, is there a reason to resolve the warning in another way?
+				@SuppressLint("SetTextI18n")
+				binding.classAndLevel.text = "${characterInfo.cclass} (${characterInfo.level})"
+				@SuppressLint("SetTextI18n")
+				binding.strengthVal.text = "${characterInfo.strength} (${getModifier(characterInfo.strength)})"
+				@SuppressLint("SetTextI18n")
+				binding.dexterityVal.text = "${characterInfo.dexterity} (${getModifier(characterInfo.dexterity)})"
+				@SuppressLint("SetTextI18n")
+				binding.constitutionVal.text = "${characterInfo.constitution} (${getModifier(characterInfo.constitution)})"
+				@SuppressLint("SetTextI18n")
+				binding.intelligenceVal.text = "${characterInfo.intelligence} (${getModifier(characterInfo.intelligence)})"
+				@SuppressLint("SetTextI18n")
+				binding.wisdomVal.text = "${characterInfo.wisdom} (${getModifier(characterInfo.wisdom)})"
+				@SuppressLint("SetTextI18n")
+				binding.charismaVal.text = "${characterInfo.charisma} (${getModifier(characterInfo.charisma)})"
+			}
+		}
 	}
 
 	override fun onDestroyView() {

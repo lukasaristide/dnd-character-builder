@@ -11,9 +11,8 @@ import java.net.URL
 import java.nio.charset.Charset
 import kotlin.concurrent.thread
 
-fun importDB(database: AppDatabase, urlBase: String): Boolean {
+fun importDB(database: AppDatabase, urlBase: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
     Log.d("URL", "Got URL: $urlBase")
-    var success: Boolean = true
     thread {
         try {
             val charsetForFetch = Charset.forName("US-ASCII")
@@ -39,12 +38,11 @@ fun importDB(database: AppDatabase, urlBase: String): Boolean {
                 }
                 database.classDao().insert(Json.decodeFromString<Class>(parsedClass))
             }
-
+            onSuccess()
         }
         catch (e : Exception){
             Log.d("ERR", e.toString())
-            success = false
+            onFailure()
         }
-    }.join()
-    return success
+    }
 }

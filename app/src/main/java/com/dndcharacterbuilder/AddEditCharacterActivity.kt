@@ -31,13 +31,8 @@ class AddEditCharacterActivity : AppCompatActivity() {
 		Room.databaseBuilder(this, AppDatabase::class.java, AppDatabase.databaseName).build()
 	}
 
-	private val classesList: ListPopupWindow by lazy {
-		createPopupList(binding.classField, database.classDao().getAll().map { it.name })
-	}
-
-	private val racesList: ListPopupWindow by lazy {
-		createPopupList(binding.raceField, database.raceDao().getAll().map { it.name })
-	}
+	private lateinit var classesList: ListPopupWindow
+	private lateinit var racesList: ListPopupWindow
 
 	private val characterId: Int by lazy {
 		intent.getIntExtra(EXTRA_ID, 0)
@@ -47,11 +42,13 @@ class AddEditCharacterActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(binding.root)
 
-		// These fields are initalized on first reference.
-		// They cannot be initalized on the main thread as they use database.
 		thread {
-			classesList
-			racesList
+			val classItems = database.classDao().getAll().map { it.name }
+			val raceItems = database.raceDao().getAll().map { it.name }
+			runOnUiThread {
+				classesList = createPopupList(binding.classField, classItems)
+				racesList = createPopupList(binding.raceField, raceItems)
+			}
 		}
 
 		if (savedInstanceState != null) {
@@ -59,20 +56,22 @@ class AddEditCharacterActivity : AppCompatActivity() {
 			binding.classField.text = savedInstanceState.getCharSequence(BUNDLE_KEY_CLASS) ?: ""
 		}
 		else if (characterId != 0) {
-			thread threadStart@ {
-				val characterInfo = database.characterDao().getInfo(characterId) ?: return@threadStart
-				binding.nameField.setText(characterInfo.name)
-				binding.levelField.setText(characterInfo.level.toString())
+			thread {
+				val characterInfo = database.characterDao().getInfo(characterId) ?: return@thread
+				runOnUiThread {
+					binding.nameField.setText(characterInfo.name)
+					binding.levelField.setText(characterInfo.level.toString())
 
-				binding.raceField.text = characterInfo.race
-				binding.classField.text = characterInfo.cclass
+					binding.raceField.text = characterInfo.race
+					binding.classField.text = characterInfo.cclass
 
-				binding.strengthField.setText(characterInfo.strength.toString())
-				binding.dexterityField.setText(characterInfo.dexterity.toString())
-				binding.constitutionField.setText(characterInfo.constitution.toString())
-				binding.intelligenceField.setText(characterInfo.intelligence.toString())
-				binding.wisdomField.setText(characterInfo.wisdom.toString())
-				binding.charismaField.setText(characterInfo.charisma.toString())
+					binding.strengthField.setText(characterInfo.strength.toString())
+					binding.dexterityField.setText(characterInfo.dexterity.toString())
+					binding.constitutionField.setText(characterInfo.constitution.toString())
+					binding.intelligenceField.setText(characterInfo.intelligence.toString())
+					binding.wisdomField.setText(characterInfo.wisdom.toString())
+					binding.charismaField.setText(characterInfo.charisma.toString())
+				}
 			}
 		}
 

@@ -109,12 +109,10 @@ class MainActivity : AppCompatActivity() {
                 with (builder) {
                     setTitle(R.string.import_dialog_title)
                     setPositiveButton(R.string.ok_button_text) { _, _ ->
-                        if (importDB(database, urlAddress.text.toString())) {
-                            messagePrinter(R.string.database_imported_msg)
-                        }
-                        else {
-                            messagePrinter(R.string.database_not_imported_msg)
-                        }
+                        importDB(database, urlAddress.text.toString(),
+                            onSuccess = { messagePrinter(R.string.database_imported_msg) },
+                            onFailure = { messagePrinter(R.string.database_not_imported_msg) }
+                        )
                     }
                     setNegativeButton(R.string.cancel_button_text) { _, _ -> }
                     setView(dialogLayout.root)
@@ -135,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                     runOnUiThread { Toast.makeText(this, R.string.database_cleared_msg, Toast.LENGTH_SHORT).show() }
                     getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
                     runOnUiThread { recreate() }
-                }.join()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

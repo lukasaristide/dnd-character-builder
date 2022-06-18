@@ -60,35 +60,37 @@ class SkillsFragment : Fragment() {
                 ).build()
             }
             val characterInfo = database.characterDao().getInfo(id) ?: return@thread
-            for (skill in Skills.values()){
-                if (skill == Skills.UNDEFINED)
-                    break
-                binding.skillsTable.addView(SkillsTableRowBinding.inflate(layoutInflater).root)
-                ((binding.skillsTable[binding.skillsTable.size-1] as TableRow)[1] as TextView).text =
-                    Skills.getNameFromSkill(skill, requireContext())
-            }
-            for (row in binding.skillsTable){
-                val tableRow = row as TableRow
-                val name = (tableRow[1] as TextView).text.toString()
-                val skill = Skills.getSkillFromName(name, requireContext())
-                for (i in listOf(0, 1, 2)) {
-                    ((tableRow[2] as RadioGroup)[i] as RadioButton).setOnClickListener { _ ->
-                        val modifier = characterInfo.getSkillModifier(skill) +
-                                getProficiencyBonus(characterInfo.level) * i
-                        (tableRow[0] as TextView).text =
-                            if (modifier < 0) "$modifier"
-                            else "+$modifier"
-                        val idPrefs = id.toString() + name
-                        Log.d("PREFS ADD", idPrefs)
-                        prefs.edit().putInt(idPrefs, i).apply()
-                    }
+            activity!!.runOnUiThread {
+                for (skill in Skills.values()){
+                    if (skill == Skills.UNDEFINED)
+                        break
+                    binding.skillsTable.addView(SkillsTableRowBinding.inflate(layoutInflater).root)
+                    ((binding.skillsTable[binding.skillsTable.size-1] as TableRow)[1] as TextView).text =
+                        Skills.getNameFromSkill(skill, requireContext())
                 }
-                val proficiencyBonus = prefs.getInt(id.toString() + name, 0)
-                var button = ((tableRow[2] as RadioGroup)[proficiencyBonus] as RadioButton)
-                button.callOnClick()
-                button.isChecked = true
+                for (row in binding.skillsTable){
+                    val tableRow = row as TableRow
+                    val name = (tableRow[1] as TextView).text.toString()
+                    val skill = Skills.getSkillFromName(name, requireContext())
+                    for (i in listOf(0, 1, 2)) {
+                        ((tableRow[2] as RadioGroup)[i] as RadioButton).setOnClickListener { _ ->
+                            val modifier = characterInfo.getSkillModifier(skill) +
+                                    getProficiencyBonus(characterInfo.level) * i
+                            (tableRow[0] as TextView).text =
+                                if (modifier < 0) "$modifier"
+                                else "+$modifier"
+                            val idPrefs = id.toString() + name
+                            Log.d("PREFS ADD", idPrefs)
+                            prefs.edit().putInt(idPrefs, i).apply()
+                        }
+                    }
+                    val proficiencyBonus = prefs.getInt(id.toString() + name, 0)
+                    var button = ((tableRow[2] as RadioGroup)[proficiencyBonus] as RadioButton)
+                    button.callOnClick()
+                    button.isChecked = true
+                }
             }
-        }.join()
+        }
         return binding.root
     }
 
