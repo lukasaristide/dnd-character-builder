@@ -3,72 +3,32 @@ package com.dndcharacterbuilder.ui.utils
 import android.content.Context
 import com.dndcharacterbuilder.R
 
-enum class Skills {
-    ACROBATICS,
-    ANIMAL_HANDLING,
-    ARCANA,
-    ATHLETICS,
-    DECEPTION,
-    HISTORY,
-    INSIGHT,
-    INTIMIDATION,
-    INVESTIGATION,
-    MEDICINE,
-    NATURE,
-    PERCEPTION,
-    PERFORMANCE,
-    PERSUASION,
-    RELIGION,
-    SLEIGHT_OF_HAND,
-    STEALTH,
-    SURVIVAL,
-    UNDEFINED;
+enum class Skills (private val stringId: Int) {
+    ACROBATICS (R.string.acrobatics),
+    ANIMAL_HANDLING (R.string.animal_handling),
+    ARCANA (R.string.arcana),
+    ATHLETICS (R.string.athletics),
+    DECEPTION (R.string.deception),
+    HISTORY (R.string.history),
+    INSIGHT (R.string.insight),
+    INTIMIDATION (R.string.intimidation),
+    INVESTIGATION (R.string.investigation),
+    MEDICINE (R.string.medicine),
+    NATURE (R.string.nature),
+    PERCEPTION (R.string.perception),
+    PERFORMANCE (R.string.performance),
+    PERSUASION (R.string.persuasion),
+    RELIGION (R.string.religion),
+    SLEIGHT_OF_HAND (R.string.sleight_of_hand),
+    STEALTH (R.string.stealth),
+    SURVIVAL (R.string.survival),
+    UNDEFINED (R.string.empty_string);
     companion object{
         fun getSkillFromName(name: String, context: Context): Skills {
-            return when(name){
-                context.getString(R.string.acrobatics) -> ACROBATICS
-                context.getString(R.string.animal_handling) -> ANIMAL_HANDLING
-                context.getString(R.string.arcana) -> ARCANA
-                context.getString(R.string.athletics) -> ATHLETICS
-                context.getString(R.string.deception) -> DECEPTION
-                context.getString(R.string.history) -> HISTORY
-                context.getString(R.string.insight) -> INSIGHT
-                context.getString(R.string.intimidation) -> INTIMIDATION
-                context.getString(R.string.investigation) -> INVESTIGATION
-                context.getString(R.string.medicine) -> MEDICINE
-                context.getString(R.string.nature) -> NATURE
-                context.getString(R.string.perception) -> PERCEPTION
-                context.getString(R.string.performance) -> PERFORMANCE
-                context.getString(R.string.persuasion) -> PERSUASION
-                context.getString(R.string.religion) -> RELIGION
-                context.getString(R.string.sleight_of_hand) -> SLEIGHT_OF_HAND
-                context.getString(R.string.stealth) -> STEALTH
-                context.getString(R.string.survival) -> SURVIVAL
-                else -> UNDEFINED
-            }
+            return Skills.values().find { name == context.getString(it.stringId) } ?: UNDEFINED
         }
         fun getNameFromSkill(skill: Skills, context: Context): String {
-            return when (skill){
-                ACROBATICS -> context.getString(R.string.acrobatics)
-                ANIMAL_HANDLING -> context.getString(R.string.animal_handling)
-                ARCANA -> context.getString(R.string.arcana)
-                ATHLETICS -> context.getString(R.string.athletics)
-                DECEPTION -> context.getString(R.string.deception)
-                HISTORY -> context.getString(R.string.history)
-                INSIGHT -> context.getString(R.string.insight)
-                INTIMIDATION -> context.getString(R.string.intimidation)
-                INVESTIGATION -> context.getString(R.string.investigation)
-                MEDICINE -> context.getString(R.string.medicine)
-                NATURE -> context.getString(R.string.nature)
-                PERCEPTION -> context.getString(R.string.perception)
-                PERFORMANCE -> context.getString(R.string.performance)
-                PERSUASION -> context.getString(R.string.persuasion)
-                RELIGION -> context.getString(R.string.religion)
-                SLEIGHT_OF_HAND -> context.getString(R.string.sleight_of_hand)
-                STEALTH -> context.getString(R.string.stealth)
-                SURVIVAL -> context.getString(R.string.survival)
-                UNDEFINED -> ""
-            }
+            return context.getString(skill.stringId)
         }
     }
 }
