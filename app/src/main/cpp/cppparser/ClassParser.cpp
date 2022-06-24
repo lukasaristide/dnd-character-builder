@@ -5,11 +5,7 @@
 #include <boost/json/serialize.hpp>
 #include <iostream>
 
-namespace
-{
-    constexpr char CLASS[] = "class";
-    constexpr char NAME[] = "name";
-}
+#include "Keys.h"
 
 std::string cpp_parser::ClassParser::ParseClass(const std::string& input)
 {
@@ -24,6 +20,10 @@ std::string cpp_parser::ClassParser::ParseClass(const std::string& input)
         const auto& classJsonObject = jsonValue.as_object().at(CLASS).as_array().at(0).as_object();
         boost::json::object outputJsonObject;
         outputJsonObject.emplace(NAME, classJsonObject.at(NAME).as_string());
+        outputJsonObject.emplace(CASTER_PROGRESSION,
+                                 classJsonObject.contains(CASTER_PROGRESSION) ?
+                                    classJsonObject.at(CASTER_PROGRESSION).as_string() :
+                                    "");
         return boost::json::serialize(outputJsonObject);
     }
     catch (const std::exception& exception) {

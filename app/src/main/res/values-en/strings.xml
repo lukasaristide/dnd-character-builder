@@ -51,4 +51,19 @@
 	<string name="proficient">proficient</string>
 	<string name="nonproficient">nonproficient</string>
 	<string name="expertise">expertise</string>
+    <string name="app_name">DnD Character Builder</string>
+	<string name="tab_text_1">Basic info</string>
+	<string name="tab_text_2">Skills</string>
+	<string name="circle1">Circle 1</string>
+	<string name="circle2">Circle 2</string>
+	<string name="circle3">Circle 3</string>
+	<string name="circle4">Circle 4</string>
+	<string name="circle5">Circle 5</string>
+	<string name="circle6">Circle 6</string>
+	<string name="circle7">Circle 7</string>
+	<string name="circle8">Circle 8</string>
+	<string name="circle9">Circle 9</string>
+    <string name="spellslots">Spellslots</string>
+	<string name="tab_text_3">Spellcasting</string>
+	<string name="undefined">UNDEFINED</string>
 </resources>

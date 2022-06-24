@@ -1,0 +1,271 @@
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="32dp"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/spellslots_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:inputType="textPersonName"
+                    android:labelFor="@id/table_circles"
+                    android:text="@string/spellslots"
+                    android:textSize="24sp" />
+
+                <TableLayout
+                    android:id="@+id/table_circles"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:stretchColumns="*" >
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle1Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle1"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle1Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle2Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle2"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle2Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle3Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle3"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle3Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle4Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle4"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle4Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle5Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle5"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle5Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle6Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle6"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle6Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle7Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle7"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle7Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle8Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle8"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle8Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/circle9Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/circle9"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/circle9Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:background="@drawable/popup_button_background"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="8dp"
+                            android:textColor="?editTextColor"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

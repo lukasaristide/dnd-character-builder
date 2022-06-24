@@ -141,6 +141,7 @@ class MainActivity : AppCompatActivity() {
                     runOnUiThread { Toast.makeText(this, R.string.database_cleared_msg, Toast.LENGTH_SHORT).show() }
                     getSharedPreferences(MainActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
                     runOnUiThread { recreate() }
+                    database.close()
                 }
                 true
             }

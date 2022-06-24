@@ -15,6 +15,7 @@ import com.dndcharacterbuilder.R
 import com.dndcharacterbuilder.database.AppDatabase
 import com.dndcharacterbuilder.database.Character
 import com.dndcharacterbuilder.databinding.ActivityAddCharacterBinding
+import com.dndcharacterbuilder.ui.createPopupList
 
 class AddEditCharacterActivity : AppCompatActivity() {
 	companion object {
@@ -46,8 +47,8 @@ class AddEditCharacterActivity : AppCompatActivity() {
 			val classItems = database.classDao().getAll().map { it.name }
 			val raceItems = database.raceDao().getAll().map { it.name }
 			runOnUiThread {
-				classesList = createPopupList(binding.classField, classItems)
-				racesList = createPopupList(binding.raceField, raceItems)
+				classesList = createPopupList(binding.classField, classItems, this)
+				racesList = createPopupList(binding.raceField, raceItems, this)
 			}
 		}
 
@@ -118,28 +119,6 @@ class AddEditCharacterActivity : AppCompatActivity() {
 		super.onSaveInstanceState(savedInstanceState)
 		savedInstanceState.putCharSequence(BUNDLE_KEY_RACE, binding.raceField.text)
 		savedInstanceState.putCharSequence(BUNDLE_KEY_CLASS, binding.classField.text)
-	}
-
-	private fun createPopupList (field: TextView, items: List<String>): ListPopupWindow {
-		val popup = ListPopupWindow(this).apply {
-			setAdapter(ArrayAdapter(this@AddEditCharacterActivity, R.layout.item_popup, items))
-			anchorView = field
-			isModal = true
-			setOnItemClickListener { _, _, position, _ ->
-				field.text = items[position]
-				dismiss()
-			}
-		}
-		field.apply {
-			setOnClickListener { popup.show() }
-			isFocusableInTouchMode = true
-			setOnFocusChangeListener { _, hasFocus ->
-				if (hasFocus) {
-					popup.show()
-				}
-			}
-		}
-		return popup
 	}
 
 	private fun require (view: TextView) {

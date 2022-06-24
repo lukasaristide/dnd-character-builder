@@ -22,7 +22,7 @@ enum class Skills (private val stringId: Int) {
     SLEIGHT_OF_HAND (R.string.sleight_of_hand),
     STEALTH (R.string.stealth),
     SURVIVAL (R.string.survival),
-    UNDEFINED (R.string.empty_string);
+    UNDEFINED (R.string.undefined);
     companion object{
         fun getSkillFromName(name: String, context: Context): Skills {
             return Skills.values().find { name == context.getString(it.stringId) } ?: UNDEFINED

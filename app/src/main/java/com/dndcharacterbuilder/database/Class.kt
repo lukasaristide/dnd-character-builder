@@ -13,7 +13,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Class(
     @SerialName("name")
-    var name: String
+    var name: String,
+    @SerialName("casterProgression")
+    var casterProgression : String
 ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

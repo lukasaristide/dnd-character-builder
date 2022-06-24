@@ -79,13 +79,11 @@ class CharactersAdapter(
 		private val menu: ListPopupWindow = ListPopupWindow(context)
 		private val menuItems: Array<MenuItem> = arrayOf (
 			MenuItem(
-				context.resources.getString(R.string.edit_text),
-				{ this@CharactersAdapter.menuListener.edit(getAdapterItem()) }
-			),
+				context.resources.getString(R.string.edit_text)
+			) { this@CharactersAdapter.menuListener.edit(getAdapterItem()) },
 			MenuItem(
-				context.resources.getString(R.string.delete_text),
-				{ this@CharactersAdapter.menuListener.delete(getAdapterItem()) }
-			)
+				context.resources.getString(R.string.delete_text)
+			) { this@CharactersAdapter.menuListener.delete(getAdapterItem()) }
 		)
 
 		init {
@@ -93,10 +91,10 @@ class CharactersAdapter(
 			menu.setAdapter(ArrayAdapter(context, R.layout.popup_menu_item, menuItems))
 			menu.anchorView = binding.root
 			menu.isModal = true
-			menu.setOnItemClickListener({ parent, _, position, _ ->
+			menu.setOnItemClickListener { parent, _, position, _ ->
 				(parent.getItemAtPosition(position) as? MenuItem)?.let { it.action() }
 				menu.dismiss()
-			})
+			}
 			binding.root.setOnLongClickListener(View.OnLongClickListener {
 				menu.show()
 				false

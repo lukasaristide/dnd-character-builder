@@ -39,6 +39,7 @@ fun importDB(database: AppDatabase, urlBase: String, onSuccess: () -> Unit, onFa
                 database.classDao().insert(Json.decodeFromString<Class>(parsedClass))
             }
             onSuccess()
+            database.close()
         }
         catch (e : Exception){
             Log.d("ERR", e.toString())

@@ -90,6 +90,7 @@ class SkillsFragment : Fragment() {
                     button.isChecked = true
                 }
             }
+            database.close()
         }
         return binding.root
     }
